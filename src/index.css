@@ -1,0 +1,117 @@
+/* * {
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+html,
+body {
+  background-image: linear-gradient(to bottom right, #2fc0c7, #0c4650);
+  height: 100%;
+  width: 100%;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 90vh;
+  width: 80%;
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.center-container img {
+  max-width: 100%;
+  height: auto;
+  margin: 20px 0;
+  max-height: 200px;
+  /* Фиксированная высота для изображений */
+  width: auto;
+  /* Фиксированная ширина для изображений */
+}
+
+body,
+ul,
+li {
+  margin: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+Button link {
+  font-family: 'Mazzard';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+body,
+#root,
+.app {
+  margin: 0 auto;
+  width: 100vw;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+@font-face {
+  font-family: 'Mazzard';
+  src: local('Mazzard M Medium'), local('Mazzard-M-Medium'), url(../public/fonts/Mazzard/MazzardM-Medium.woff2) format('woff2'),
+    url(../public/fonts/Mazzard/MazzardM-Medium.woff) format('woff'), url(../public/fonts/Mazzard/MazzardM-Medium.ttf) format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mazzard';
+  src: local('Mazzard M Regular'), local('Mazzard-M-Regular'), url(../public/fonts/Mazzard/MazzardM-Regular.woff2) format('woff2'),
+    url(../public/fonts/Mazzard/MazzardM-Regular.woff) format('woff'), url(../public/fonts/Mazzard/MazzardM-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Mazzard';
+  src: local('Mazzard M SemiBold'), local('Mazzard-M-SemiBold'), url(../public/fonts/Mazzard/MazzardM-SemiBold.woff2) format('woff2'),
+    url(../public/fonts/Mazzard/MazzardM-SemiBold.woff) format('woff'), url(../public/fonts/Mazzard/MazzardM-SemiBold.ttf) format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter Regular'), local('Inter-Regular'), url(../public/fonts/Inter/Inter-Regular.woff2) format('woff2'),
+    url(../public/fonts/Inter/Inter-Regular.woff) format('woff'), url(../public/fonts/Inter/Inter-Regular.ttf) format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}

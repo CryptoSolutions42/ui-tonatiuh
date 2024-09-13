@@ -1,0 +1,1 @@
+export { PartnerSectionOptions } from './PartnerSection.content';

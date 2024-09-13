@@ -1,0 +1,1 @@
+export { StorySectionOption } from './StorySection.content';
