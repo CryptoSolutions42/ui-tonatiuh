@@ -17,11 +17,12 @@ const primaryL = css`
 `;
 
 const primaryB = css`
-  background-color: #624bff;
-
+  background-image: linear-gradient(to bottom right, rgba(32, 124, 145, 0.94), rgb(12, 126, 123));
+  border-radius: 10px;
   :hover {
-    background: #8061ff;
-    box-shadow: 0px 5px 10px rgba(98, 75, 255, 0.5);
+    background-image: linear-gradient(to bottom right, rgba(47, 201, 186, 0.94), rgb(12, 126, 109));
+
+    box-shadow: 0px 5px 10px rgba(11, 144, 111, 0.68);
   }
 
   :active {

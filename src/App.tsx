@@ -9,6 +9,7 @@ import { Loader } from './components/Base';
 
 import { Suspense } from 'react';
 import { License } from './app/License';
+import Dashboard from './app/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           {/* <Route path="/" element={<Hello />} /> */}
           <Route path="/license" element={<License />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Suspense>
     </div>
