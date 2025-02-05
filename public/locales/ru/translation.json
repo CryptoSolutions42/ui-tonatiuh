@@ -1,1 +1,14 @@
-{}
+{
+  "Config": "Конфигурации",
+  "Hidden Config": "Свернуть",
+  "Update Config": "Обновить Конфиг",
+  "Dashboard": "Управление",
+  "Statistic": "Статистика",
+  "History": "История",
+  "License": "Лицензия",
+  "Payment": "Платежи",
+  "Trading start": "Начать торговлю",
+  "Trading stop": "Остановка торговли",
+  "Emergency stop": "Жесткая остановка",
+  "Balance distribution": "Распределение баланса"
+}

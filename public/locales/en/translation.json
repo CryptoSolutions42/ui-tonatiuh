@@ -1,1 +1,14 @@
-{}
+{
+  "Config": "Config",
+  "Hidden Config": "Hidden Config",
+  "Update Config": "Update Config",
+  "Dashboard": "Dashboart",
+  "Statistic": "Statistic",
+  "History": "History",
+  "License": "License",
+  "Payment": "Payment",
+  "Trading start": "Trading start",
+  "Trading stop": "Trading stop",
+  "Emergency stop": "Emergency stop",
+  "Balance distribution": "Balance distribution"
+}

@@ -16,9 +16,7 @@ function App() {
     <div className="App">
       <Suspense fallback={<Loader />}>
         <Routes>
-          {/* <Route path="/" element={<Hello />} /> */}
-          <Route path="/license" element={<License />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/app/*" element={<Dashboard />} />
         </Routes>
       </Suspense>
     </div>

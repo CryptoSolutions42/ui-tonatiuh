@@ -1,14 +1,21 @@
-import { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
-import { ConfigForm, FormGroup, InputForm, LabelForm, StyledConfig } from './styled/ConfigComponent.styled';
+import {
+  ConfigForm,
+  FormGroup,
+  InputForm,
+  LabelForm,
+  StyledConfig,
+  HiddenButtonWrapper,
+} from './styled/ConfigComponent.styled';
 import { ConfigType, IAppState } from '../../../../redux/types';
 import { RootState } from '../../../../redux/store';
-import { Button } from '../../../../components/Base';
+import { Button, SH1 } from '../../../../components/Base';
 
-export const ConfigComponent = () => {
-  const { config } = useSelector((state: RootState) => state.AppReducer);
-
+export const ConfigComponent: React.FC<{config: ConfigType}> = ({config}) => {
+  const { t } = useTranslation();
   const [width, setWidth] = useState<string>('100px');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
@@ -55,25 +62,29 @@ export const ConfigComponent = () => {
         <span
           style={{
             height: '100%',
+            width: '600px',
             color: 'white',
             fontWeight: 700,
             fontSize: '25px',
             display: 'flex',
-            alignItems: 'center',
+            alignItems: 'flex-end',
             justifyContent: 'center',
             transform: 'rotate(90deg)',
+            cursor: 'pointer',
           }}
         >
-          Config
+          {t('Config')}
         </span>
       ) : (
         <ConfigForm isVisible={isExpanded}>
-          <div
-            style={{ color: '#add6dd', fontSize: '20px', fontWeight: 700, marginBottom: '30px' }}
-            onClick={() => width !== '100px' && toolbarHandleWidth()}
-          >
-            {'=> Скрыть конфигурации'}
-          </div>
+          <HiddenButtonWrapper>
+            <SH1 color="#add6dd">{t('Config')}</SH1>
+            <img
+              style={{ cursor: 'pointer' }}
+              onClick={() => width !== '100px' && toolbarHandleWidth()}
+              src="./images/icons/close.svg"
+            />
+          </HiddenButtonWrapper>
           {Object.keys(config).flatMap((configName, index) => (
             <FormGroup key={`input-config-${index + 1}`}>
               <LabelForm children={`${configName}:`} />
@@ -85,7 +96,7 @@ export const ConfigComponent = () => {
             </FormGroup>
           ))}
           <Button
-            children={'Обновить Config'}
+            children={t('Update Config')}
             handleClick={() => {
               toolbarHandleWidth();
             }}

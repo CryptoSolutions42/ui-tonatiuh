@@ -21,8 +21,8 @@
 html,
 body {
   background-image: linear-gradient(to bottom right, #2fc0c7, #0c4650);
-  height: 100%;
-  width: 100%;
+  height: 100vw;
+  width: 100vh;
   font-family: 'Arial', sans-serif;
 }
 
@@ -82,7 +82,7 @@ body,
 .app {
   margin: 0 auto;
   width: 100vw;
-  height: 100%;
+  height: 100vw;
   overflow-x: hidden;
 }
 

@@ -121,10 +121,10 @@ type BigLogoType = SocialFooterType;
 
 export type DescriptionType = string | JSX.Element;
 
-export type TypeButton = 'primary-l' | 'primary-b' | 'secondary-l';
+export type TypeButton = 'primary-l' | 'primary-b' | 'secondary-l' | 'secondary-b';
 
 export type ButtonType = {
-  children: JSX.Element | string;
+  children: JSX.Element | string | any;
   handleClick: () => void;
   type: TypeButton;
   disabled?: boolean;

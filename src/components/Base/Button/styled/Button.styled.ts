@@ -30,6 +30,21 @@ const primaryB = css`
   }
 `;
 
+const secondaryB = css`
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
 const secondaryL = css`
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -48,6 +63,10 @@ const disabledPrimaryL = css`
   color: #eaedfe;
 `;
 const disabledPrimaryB = css`
+  background-color: #b1a5ff;
+  color: #e0e3ff;
+`;
+const disabledSecondaryB = css`
   background-color: #b1a5ff;
   color: #e0e3ff;
 `;
@@ -84,6 +103,10 @@ export const StyledButton = styled.div<{ type: TypeButton; disabled?: boolean }>
       ? disabled
         ? disabledPrimaryB
         : primaryB
+      : type === 'secondary-b'
+      ? disabled
+        ? disabledSecondaryB
+        : secondaryB
       : disabled
       ? disabledSecondaryL
       : secondaryL};
