@@ -18,7 +18,14 @@ export const DashboardBody = styled.div`
   background-image: linear-gradient(to bottom right, rgba(7, 20, 23, 0.94), rgb(13, 43, 76));
 `;
 
-export const DashboardList = styled.div`
+export const TradingComponent = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  padding: 20px 20px 20px;
+`;
+
+export const DashboardTabs = styled.div`
   width: 100%;
   height: 40px;
   background-image: linear-gradient(to bottom right, rgb(13, 43, 76), rgba(4, 47, 57, 0.94));
@@ -28,9 +35,22 @@ export const DashboardList = styled.div`
   align-items: center;
 `;
 
-export const TradingComponent = styled.div`
+export const DashboardEmpty = styled.div`
+  height: 100%;
   display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  padding: 20px 20px 20px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const DashboardEmptyImage = styled.img`
+  width: 30%;
+  opacity: 0.2;
+  transition: width 0.2s ease;
+  cursor: pointer;
+
+  :hover {
+    width: 40%;
+    opacity: 0.4;
+    transition: width 0.4s ease;
+  }
 `;

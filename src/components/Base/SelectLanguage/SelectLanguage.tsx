@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const StyledSelectLanguage = styled.div`
   height: 25px;
+  width: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,7 +42,7 @@ export const SelectLanguageContainer = () => {
     if (language) {
       i18n.changeLanguage(language);
     }
-  });
+  }, []);
 
   const changeLanguage = (event: React.ChangeEvent<HTMLSelectElement>) => {
     window.localStorage.setItem('Tonatiuh_i18nextLng', event.target.value);

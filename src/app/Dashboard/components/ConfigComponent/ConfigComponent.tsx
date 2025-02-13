@@ -14,7 +14,7 @@ import { ConfigType, IAppState } from '../../../../redux/types';
 import { RootState } from '../../../../redux/store';
 import { Button, SH1 } from '../../../../components/Base';
 
-export const ConfigComponent: React.FC<{config: ConfigType}> = ({config}) => {
+export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) => {
   const { t } = useTranslation();
   const [width, setWidth] = useState<string>('100px');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
@@ -82,12 +82,12 @@ export const ConfigComponent: React.FC<{config: ConfigType}> = ({config}) => {
             <img
               style={{ cursor: 'pointer' }}
               onClick={() => width !== '100px' && toolbarHandleWidth()}
-              src="./images/icons/close.svg"
+              src="/images/icons/close.svg"
             />
           </HiddenButtonWrapper>
           {Object.keys(config).flatMap((configName, index) => (
             <FormGroup key={`input-config-${index + 1}`}>
-              <LabelForm children={`${configName}:`} />
+              <LabelForm children={`${t(configName)}:`} />
               <InputForm
                 type={startsWithIs(configName) ? 'checkbox' : 'text'}
                 name={configName}

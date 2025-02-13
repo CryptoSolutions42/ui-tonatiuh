@@ -51,7 +51,7 @@ export const DashboardToolbarComponent: React.FC = () => {
           marginBottom: '50px',
         }}
       />
-      <Link to="dashboard">
+      <Link style={{ textDecoration: 'none' }} to="dashboard">
         <MenuWrapper>
           <img style={{ width: '55px', transition: '0.1s easy' }} src="/images/icons/dashboard.svg" />
           {toolbarWidth === '400px' && (
@@ -61,7 +61,7 @@ export const DashboardToolbarComponent: React.FC = () => {
           )}
         </MenuWrapper>
       </Link>
-      <Link to="statistic">
+      <Link style={{ textDecoration: 'none' }} to="statistic">
         <MenuWrapper>
           <img style={{ width: '55px', gap: '10px' }} src="/images/icons/statistic.svg" />
           {toolbarWidth === '400px' && (
@@ -71,7 +71,7 @@ export const DashboardToolbarComponent: React.FC = () => {
           )}
         </MenuWrapper>
       </Link>
-      <Link to="history">
+      <Link style={{ textDecoration: 'none' }} to="history">
         <MenuWrapper>
           <img style={{ width: '55px', gap: '10px' }} src="/images/icons/history.svg" />
           {toolbarWidth === '400px' && (
@@ -81,7 +81,7 @@ export const DashboardToolbarComponent: React.FC = () => {
           )}
         </MenuWrapper>
       </Link>
-      <Link to="license">
+      <Link style={{ textDecoration: 'none' }} to="license">
         <MenuWrapper>
           <img style={{ width: '55px', gap: '10px' }} src="/images/icons/license.svg" />
           {toolbarWidth === '400px' && (
@@ -91,7 +91,7 @@ export const DashboardToolbarComponent: React.FC = () => {
           )}
         </MenuWrapper>
       </Link>
-      <Link to="payment">
+      <Link style={{ textDecoration: 'none' }} to="payment">
         <MenuWrapper>
           <img style={{ width: '55px', gap: '10px' }} src="/images/icons/payment.svg" />
           {toolbarWidth === '400px' && (

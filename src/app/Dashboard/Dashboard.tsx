@@ -1,14 +1,16 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
 
 import { RootState } from '../../redux/store';
 import {
   DashboardBody,
   StyledDashboard,
-  DashboardList,
+  DashboardTabs,
   DashboardContainer,
   TradingComponent,
+  DashboardEmpty,
+  DashboardEmptyImage,
 } from './styled/Dashboard.styled';
 import { TradingViewChart } from './components/TradingViewChart/TradingViewChart';
 import { ConfigComponent } from './components/ConfigComponent/ConfigComponent';
@@ -16,29 +18,40 @@ import { PanelComponent } from './components/PanelComponent/PanelComponent';
 import { SelectLanguageContainer } from '../../components/Base/SelectLanguage/SelectLanguage';
 import { convertSymbol } from '../../utils/helper';
 import { DashboardToolbarComponent } from './components/DashboardComponents/DashboardToolbar/DashboardToolbar';
+import { Tabs } from './components/DashboardComponents/Tabs/Tabs';
 
 const Dashboard: React.FC = () => {
-  const { config } = useSelector((state: RootState) => state.AppReducer);
+  const { currentConfig } = useSelector((state: RootState) => state.AppReducer);
+  const { configs } = useSelector((state: RootState) => state.AppReducer);
 
   return (
     <StyledDashboard>
       <DashboardToolbarComponent />
       <DashboardContainer>
-        <DashboardList>
+        <DashboardTabs>
+          <Tabs currentTab={currentConfig?.id} />
           <SelectLanguageContainer />
-        </DashboardList>
+        </DashboardTabs>
         <DashboardBody>
           <Routes>
             <Route
               path="/dashboard"
               element={
-                <>
-                  <TradingComponent>
-                    <TradingViewChart symbol={convertSymbol(config.symbol)} interval="1H" />
-                    <ConfigComponent config={config} />
-                  </TradingComponent>
-                  <PanelComponent />
-                </>
+                configs.length && currentConfig ? (
+                  <>
+                    <TradingComponent>
+                      <TradingViewChart symbol={convertSymbol(currentConfig.symbol)} interval="1H" />
+                      <ConfigComponent config={currentConfig} />
+                    </TradingComponent>
+                    <PanelComponent />
+                  </>
+                ) : (
+                  <>
+                    <DashboardEmpty>
+                      <DashboardEmptyImage src="/images/icons/plus-file.svg" />
+                    </DashboardEmpty>
+                  </>
+                )
               }
             />
             <Route path="/statistic" element={<h1>Statistic</h1>} />

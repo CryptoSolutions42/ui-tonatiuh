@@ -1,8 +1,8 @@
 import { call, put } from 'redux-saga/effects';
 
 import { appStoreActions } from '../../reducer/app-reducer/reducer';
-import { NotificationType } from '../../types';
-import { AppSagaAction } from './saga-actions';
+import { ConfigType, NotificationType } from '../../types';
+import { apiGetConfigs } from '../../api/config/config.api';
 
 /**
  * @description hardcode duration on 5000 ms
@@ -19,6 +19,11 @@ export function* notificationVisible({ payload }: { payload: NotificationType })
   );
 }
 
+export function* getConfigs() {
+  const configs: ConfigType[] = yield call(apiGetConfigs);
+  yield put(appStoreActions.getConfigsState(configs));
+}
+
 export function* closeNotification() {
   yield call(sleep);
   yield put(appStoreActions.notificationClose());
@@ -28,7 +33,7 @@ function* errorProcessing(error: unknown) {
   const { message } = error as { message: string };
 
   yield put(
-    AppSagaAction.notification({
+    appStoreActions.notification({
       isActive: true,
       mode: 'error',
       message: message,

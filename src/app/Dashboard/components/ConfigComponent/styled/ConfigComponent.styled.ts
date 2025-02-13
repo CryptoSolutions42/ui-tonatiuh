@@ -13,7 +13,6 @@ export const StyledConfig = styled.div<{ width?: string }>`
   -webkit-box-shadow: 0px 0px 15px 2px rgba(21, 170, 178, 0.7);
   -moz-box-shadow: 0px 0px 15px 2px rgba(21, 171, 178, 0.7);
   box-shadow: 0px 0px 15px 2px rgba(21, 171, 178, 0.7);
-  overflow: scroll;
 `;
 
 export const ConfigForm = styled.form<{ isVisible: boolean }>`

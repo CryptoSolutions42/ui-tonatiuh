@@ -9,29 +9,34 @@ export interface IAppState {
   notification: NotificationType;
   isOpenModal: boolean;
   userId: string;
-  config: ConfigType;
+  configs: ConfigType[];
+  currentConfig?: ConfigType;
 }
 
 export type ConfigType = {
+  id: number;
   apiKey?: string;
   privateKey?: string;
   password?: string;
-  positionSize: number;
   symbol: string;
-  exchange: 'okx';
+  positionSize: number;
+  countGridSize: number | null;
+  gridSize: number | null;
   percentBuyBackStep: number;
+  takeProfit: number | null;
+  stopLoss: number | null;
+  isEmergencyStop: boolean;
+  isFibonacci: boolean;
   percentProfit: number;
   percentFromBalance: number;
   candlePriceRange: string;
-  percentTargetAfterTakeProfit: number;
-  countGridSize: number | null;
-  gridSize: number | null;
-  takeProfit: number | null;
-  stopLoss: number | null;
-  isFibonacci: boolean;
   isPercentTargetAfterTakeProfit: boolean;
   isCapitalizeDeltaFromSale: boolean;
   isCoinAccumulation: boolean;
-  isConfigUpdate: boolean;
+  isConfigUpdated: boolean;
   isAutoStartTrading: boolean;
+  isStopTrading: boolean;
+  percentTargetAfterTakeProfit: number;
+  balanceDistribution: boolean;
+  exchange: 'okx' | 'binance' | 'bitget' | 'kucoin' | 'mexc' | 'poloniex' | 'gate' | 'exmo' | 'bybit';
 };
