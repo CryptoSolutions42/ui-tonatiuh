@@ -8,7 +8,7 @@ import { StyledLoader } from './components/Base/Loader/styled';
 import { Loader } from './components/Base';
 
 import { Suspense } from 'react';
-import { License } from './app/License';
+import { License } from './app/Dashboard/components/License';
 import Dashboard from './app/Dashboard/Dashboard';
 
 function App() {

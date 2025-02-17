@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { QrGenerator } from '../../components/Base/QrGenerator/QrGenerator';
-import { CopyToClipboard } from '../../components/Base/CopyToClipboard/CopyToClipboard';
-import { PaymentData } from '../../types/types';
-import { SH1 } from '../../components/Base';
+import { QrGenerator } from '../../../../components/Base/QrGenerator/QrGenerator';
+import { CopyToClipboard } from '../../../../components/Base/CopyToClipboard/CopyToClipboard';
+import { PaymentData } from '../../../../types/types';
+import { SH1 } from '../../../../components/Base';
 
 export const Payment = ({ userId, amount }: { userId: string; amount: number }) => {
   const [paymentData, setPaymentData] = useState<PaymentData>({} as PaymentData);

@@ -18,7 +18,7 @@ export async function getCandlestickData(symbol: string, interval: string) {
         high: parseFloat(candle[2]),
         low: parseFloat(candle[3]),
         close: parseFloat(candle[4]),
-        value: parseFloat(candle[5])
+        value: parseFloat(candle[5]),
       }))
       .sort((a, b) => a.time - b.time);
 
@@ -31,4 +31,8 @@ export async function getCandlestickData(symbol: string, interval: string) {
 
 export function convertSymbol(symbol: string): string {
   return symbol.split('/').join('-');
+}
+
+export function startsWithIs(str: string): boolean {
+  return str.substring(0, 2) === 'is';
 }

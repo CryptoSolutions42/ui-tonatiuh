@@ -3,7 +3,10 @@ import { ConfigType, IAppState, NotificationType } from '../../types';
 
 const initialState: IAppState = {
   isLoading: false,
-  isOpenModal: false,
+  modalWindow: {
+    isOpenModal: false,
+    modalType: '',
+  },
   notification: {
     isActive: false,
     mode: undefined,
@@ -11,7 +14,8 @@ const initialState: IAppState = {
   },
   userId: '',
   configs: [],
-  currentConfig: undefined
+  currentConfig: undefined,
+  currentMenu: '',
 };
 
 export const appStore = createSlice({
@@ -31,14 +35,17 @@ export const appStore = createSlice({
         message: undefined,
       };
     },
-    toggleModal(state, { payload }: PayloadAction<boolean>) {
-      state.isOpenModal = payload;
+    toggleModal(state, { payload }: PayloadAction<{ isOpenModal: boolean; modalType: string }>) {
+      if (payload.modalType !== '') state.modalWindow = payload;
     },
     getConfigsState(state, { payload }: PayloadAction<ConfigType[]>) {
       state.configs = payload;
     },
     getCurrentConfig(state, { payload }: PayloadAction<ConfigType>) {
       state.currentConfig = payload;
+    },
+    setCurrentMenu(state, { payload }: PayloadAction<string>) {
+      state.currentMenu = payload;
     },
   },
 });

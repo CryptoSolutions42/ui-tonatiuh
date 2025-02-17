@@ -1,7 +1,8 @@
 {
   "Config": "Конфигурации",
   "Hidden Config": "Свернуть",
-  "Update Config": "Обновить Конфиг",
+  "Update Config": "Обновить конфиг",
+  "Create Config": "Создать конфиг",
   "Dashboard": "Управление",
   "Statistic": "Статистика",
   "History": "История",

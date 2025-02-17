@@ -5,7 +5,7 @@ export const DashboardToolbar = styled.div<{ width?: string }>`
     css`
       width: ${width ?? '400px'};
     `};
-  background-image: linear-gradient(to bottom right, rgba(7, 20, 23, 0.94), rgb(13, 43, 76));
-  transition: width 0.2s ease;
+  background: rgb(26, 28, 31);
+  transition: width 0.05s ease;
   padding: 20px;
 `;

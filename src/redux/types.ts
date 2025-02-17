@@ -7,10 +7,14 @@ export type NotificationType = {
 export interface IAppState {
   isLoading: boolean;
   notification: NotificationType;
-  isOpenModal: boolean;
+  modalWindow: {
+    isOpenModal: boolean;
+    modalType: string;
+  };
   userId: string;
   configs: ConfigType[];
   currentConfig?: ConfigType;
+  currentMenu: string;
 }
 
 export type ConfigType = {
@@ -33,10 +37,10 @@ export type ConfigType = {
   isPercentTargetAfterTakeProfit: boolean;
   isCapitalizeDeltaFromSale: boolean;
   isCoinAccumulation: boolean;
-  isConfigUpdated: boolean;
   isAutoStartTrading: boolean;
   isStopTrading: boolean;
   percentTargetAfterTakeProfit: number;
   balanceDistribution: boolean;
   exchange: 'okx' | 'binance' | 'bitget' | 'kucoin' | 'mexc' | 'poloniex' | 'gate' | 'exmo' | 'bybit';
+  loggerEvent: string;
 };

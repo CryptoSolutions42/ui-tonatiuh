@@ -20,10 +20,10 @@ export const TradingViewChart = ({ symbol, interval }) => {
       layout: {
         background: {
           type: ColorType.VerticalGradient,
-          bottomColor: 'rgba(7, 20, 23, 0.254)',
-          topColor: '#222',
+          bottomColor: 'rgb(26, 28, 31)',
+          topColor: 'rgb(26, 28, 31)',
         },
-        textColor: 'white',
+        textColor: '#bab9b9',
       },
     });
 

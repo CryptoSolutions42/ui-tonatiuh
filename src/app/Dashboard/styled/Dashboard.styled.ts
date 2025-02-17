@@ -15,7 +15,7 @@ export const DashboardContainer = styled.div`
 export const DashboardBody = styled.div`
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(to bottom right, rgba(7, 20, 23, 0.94), rgb(13, 43, 76));
+  background: #212327;
 `;
 
 export const TradingComponent = styled.div`
@@ -28,8 +28,7 @@ export const TradingComponent = styled.div`
 export const DashboardTabs = styled.div`
   width: 100%;
   height: 40px;
-  background-image: linear-gradient(to bottom right, rgb(13, 43, 76), rgba(4, 47, 57, 0.94));
-  opacity: 0.9;
+  background: rgb(26, 28, 31);
   display: flex;
   justify-content: end;
   align-items: center;
@@ -45,12 +44,12 @@ export const DashboardEmpty = styled.div`
 export const DashboardEmptyImage = styled.img`
   width: 30%;
   opacity: 0.2;
-  transition: width 0.2s ease;
+  transition: width 0.1s ease;
   cursor: pointer;
 
   :hover {
     width: 40%;
     opacity: 0.4;
-    transition: width 0.4s ease;
+    transition: width 1s ease;
   }
 `;

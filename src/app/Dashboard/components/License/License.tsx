@@ -4,9 +4,9 @@ import Select from 'react-select';
 import styled from 'styled-components';
 
 import { Payment } from '../Payment';
-import { appStoreActions } from '../../redux/reducer/app-reducer/reducer';
-import { Button, Card, H1, ModalWindow } from '../../components/Base';
-import { RootState } from '../../redux/store';
+import { appStoreActions } from '../../../../redux/reducer/app-reducer/reducer';
+import { Button, Card, H1, ModalWindow } from '../../../../components/Base';
+import { RootState } from '../../../../redux/store';
 
 const options = [
   { value: 1, label: '1' },
@@ -55,7 +55,7 @@ export const License = () => {
   const [threads, setThreads] = useState([1, 1, 1]);
   const [amount, setAmount] = useState(0);
   const { AppReducer } = useSelector((state: RootState) => state);
-  const { isOpenModal, userId } = AppReducer;
+  const { modalWindow, userId } = AppReducer;
 
   const mockTariff = [
     {
@@ -135,7 +135,12 @@ export const License = () => {
                     children={'Купить'}
                     handleClick={() => {
                       setAmount(tariff.price);
-                      dispatch(appStoreActions.toggleModal(!isOpenModal));
+                      dispatch(
+                        appStoreActions.toggleModal({
+                          modalType: 'payment',
+                          isOpenModal: !modalWindow.isOpenModal,
+                        }),
+                      );
                     }}
                     type={'primary-b'}
                   />
@@ -145,7 +150,11 @@ export const License = () => {
           );
         })}
       </LicenseTag>
-      {isOpenModal ? <ModalWindow children={<Payment userId={userId} amount={amount} />} /> : <></>}
+      {modalWindow.isOpenModal && modalWindow.modalType === 'payment' ? (
+        <ModalWindow children={<Payment userId={userId} amount={amount} />} />
+      ) : (
+        <></>
+      )}
     </LicensePage>
   );
 };
