@@ -43,7 +43,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
 
   const printNameInput = (nameField: string) => {
     if (nameField === 'apiKey' || nameField === 'privateKey' || nameField === 'password') {
-      return 'Приватные данные не отображаются';
+      return t('Private data is not displayed');
     }
 
     return startsWithIs(nameField) ? Boolean(config[nameField]) : config[nameField];

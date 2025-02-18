@@ -15,7 +15,7 @@ const initialState: IAppState = {
   userId: '',
   configs: [],
   currentConfig: undefined,
-  currentMenu: '',
+  currentMenu: 'dashboard',
 };
 
 export const appStore = createSlice({

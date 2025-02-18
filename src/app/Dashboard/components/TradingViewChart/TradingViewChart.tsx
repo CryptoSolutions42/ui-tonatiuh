@@ -25,6 +25,25 @@ export const TradingViewChart = ({ symbol, interval }) => {
         },
         textColor: '#bab9b9',
       },
+      grid: {
+        vertLines: {
+          color: 'rgba(63, 65, 71, 0.5)',
+          style: LineStyle.Dotted,
+        },
+        horzLines: {
+          color: 'rgba(63, 65, 71, 0.5)',
+          style: LineStyle.Dotted,
+        },
+      },
+      handleScroll: {
+        mouseWheel: true,
+        pressedMouseMove: true,
+      },
+      handleScale: {
+        axisPressedMouseMove: true,
+        mouseWheel: true,
+        pinch: true,
+      },
     });
 
     const candlestickSeries = chart.addCandlestickSeries({

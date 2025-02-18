@@ -66,5 +66,5 @@ export const InputForm = styled.input<{ type: string }>`
 export const HiddenButtonWrapper = styled.div`
   margin: 0 0 25px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 `;

@@ -51,136 +51,140 @@ export const DashboardToolbarComponent: React.FC = () => {
 
   return (
     <DashboardToolbar width={toolbarWidth}>
-      <div style={{ height: toolbarWidth === '100px' ? '160px' : '220px' }}>
-        <img
-          onClick={toolbarHandleWidth}
-          src="/images/logo/big-logo.png"
-          alt="Logo Tonatiuh"
-          style={{
-            cursor: 'pointer',
-            backgroundColor: 'transparent',
-            width: toolbarWidth === '100px' ? '249%' : '100%',
-            maxWidth: '279px',
-            transition: 'width 0.05s ease, margin-left 0.01s ease',
-            marginLeft: toolbarWidth === '100px' ? '-42px' : '0',
-            marginBottom: '50px',
-          }}
-        />
+      <div>
+        <div style={{ height: toolbarWidth === '100px' ? '160px' : '220px' }}>
+          <img
+            onClick={toolbarHandleWidth}
+            src="/images/logo/big-logo.png"
+            alt="Logo Tonatiuh"
+            style={{
+              cursor: 'pointer',
+              backgroundColor: 'transparent',
+              width: toolbarWidth === '100px' ? '249%' : '100%',
+              maxWidth: '279px',
+              transition: 'width 0.05s ease, margin-left 0.01s ease',
+              marginLeft: toolbarWidth === '100px' ? '-42px' : '0',
+              marginBottom: '50px',
+            }}
+          />
+        </div>
+        <Link style={{ textDecoration: 'none' }} onClick={() => changeCurrentMenu('dashboard')} to="dashboard">
+          <MenuWrapper currentMenu={currentMenu === 'dashboard'}>
+            <img style={{ width: '55px', gap: '10px' }} src="/images/icons/dashboard.svg" />
+            {toolbarWidth !== '100px' && (
+              <Body2
+                color="#add6dd"
+                style={{
+                  width: '50%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  transition: 'opacity 0.01s easy',
+                  opacity: isExpanded ? 1 : 0,
+                }}
+              >
+                {t('Dashboard')}
+              </Body2>
+            )}
+          </MenuWrapper>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} onClick={() => changeCurrentMenu('statistic')} to="statistic">
+          <MenuWrapper currentMenu={currentMenu === 'statistic'}>
+            <img style={{ width: '55px', gap: '10px' }} src="/images/icons/statistic.svg" />
+            {toolbarWidth !== '100px' && (
+              <Body2
+                color="#add6dd"
+                style={{
+                  width: '50%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  transition: 'opacity 0.01s easy',
+                  opacity: isExpanded ? 1 : 0,
+                }}
+              >
+                {t('Statistic')}
+              </Body2>
+            )}
+          </MenuWrapper>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} onClick={() => changeCurrentMenu('history')} to="history">
+          <MenuWrapper currentMenu={currentMenu === 'history'}>
+            <img style={{ width: '55px', gap: '10px' }} src="/images/icons/history.svg" />
+            {toolbarWidth !== '100px' && (
+              <Body2
+                color="#add6dd"
+                style={{
+                  width: '50%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  transition: 'opacity 0.01s easy',
+                  opacity: isExpanded ? 1 : 0,
+                }}
+              >
+                {t('History')}
+              </Body2>
+            )}
+          </MenuWrapper>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} onClick={() => changeCurrentMenu('license')} to="license">
+          <MenuWrapper currentMenu={currentMenu === 'license'}>
+            <img style={{ width: '55px', gap: '10px' }} src="/images/icons/license.svg" />
+            {toolbarWidth !== '100px' && (
+              <Body2
+                color="#add6dd"
+                style={{
+                  width: '50%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  transition: 'opacity 0.01s easy',
+                  opacity: isExpanded ? 1 : 0,
+                }}
+              >
+                {t('License')}
+              </Body2>
+            )}
+          </MenuWrapper>
+        </Link>
+        <Link style={{ textDecoration: 'none' }} onClick={() => changeCurrentMenu('payment')} to="payment">
+          <MenuWrapper currentMenu={currentMenu === 'payment'}>
+            <img style={{ width: '55px', gap: '10px' }} src="/images/icons/payment.svg" />
+            {toolbarWidth !== '100px' && (
+              <Body2
+                color="#add6dd"
+                style={{
+                  width: '50%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  transition: 'opacity 0.01s easy',
+                  opacity: isExpanded ? 1 : 0,
+                }}
+              >
+                {t('Payment')}
+              </Body2>
+            )}
+          </MenuWrapper>
+        </Link>
       </div>
-      <Link style={{ textDecoration: 'none' }} onClick={() => changeCurrentMenu('dashboard')} to="dashboard">
-        <MenuWrapper currentMenu={currentMenu === 'dashboard'}>
-          <img style={{ width: '55px', gap: '10px' }} src="/images/icons/dashboard.svg" />
-          {toolbarWidth !== '100px' && (
-            <Body2
-              color="#add6dd"
-              style={{
-                width: '50%',
-                display: 'flex',
-                justifyContent: 'center',
-                transition: 'opacity 0.01s easy',
-                opacity: isExpanded ? 1 : 0,
-              }}
-            >
-              {t('Dashboard')}
-            </Body2>
-          )}
-        </MenuWrapper>
-      </Link>
-      <Link style={{ textDecoration: 'none' }} onClick={() => changeCurrentMenu('statistic')} to="statistic">
-        <MenuWrapper currentMenu={currentMenu === 'statistic'}>
-          <img style={{ width: '55px', gap: '10px' }} src="/images/icons/statistic.svg" />
-          {toolbarWidth !== '100px' && (
-            <Body2
-              color="#add6dd"
-              style={{
-                width: '50%',
-                display: 'flex',
-                justifyContent: 'center',
-                transition: 'opacity 0.01s easy',
-                opacity: isExpanded ? 1 : 0,
-              }}
-            >
-              {t('Statistic')}
-            </Body2>
-          )}
-        </MenuWrapper>
-      </Link>
-      <Link style={{ textDecoration: 'none' }} onClick={() => changeCurrentMenu('history')} to="history">
-        <MenuWrapper currentMenu={currentMenu === 'history'}>
-          <img style={{ width: '55px', gap: '10px' }} src="/images/icons/history.svg" />
-          {toolbarWidth !== '100px' && (
-            <Body2
-              color="#add6dd"
-              style={{
-                width: '50%',
-                display: 'flex',
-                justifyContent: 'center',
-                transition: 'opacity 0.01s easy',
-                opacity: isExpanded ? 1 : 0,
-              }}
-            >
-              {t('History')}
-            </Body2>
-          )}
-        </MenuWrapper>
-      </Link>
-      <Link style={{ textDecoration: 'none' }} onClick={() => changeCurrentMenu('license')} to="license">
-        <MenuWrapper currentMenu={currentMenu === 'license'}>
-          <img style={{ width: '55px', gap: '10px' }} src="/images/icons/license.svg" />
-          {toolbarWidth !== '100px' && (
-            <Body2
-              color="#add6dd"
-              style={{
-                width: '50%',
-                display: 'flex',
-                justifyContent: 'center',
-                transition: 'opacity 0.01s easy',
-                opacity: isExpanded ? 1 : 0,
-              }}
-            >
-              {t('License')}
-            </Body2>
-          )}
-        </MenuWrapper>
-      </Link>
-      <Link style={{ textDecoration: 'none' }} onClick={() => changeCurrentMenu('payment')} to="payment">
-        <MenuWrapper currentMenu={currentMenu === 'payment'}>
-          <img style={{ width: '55px', gap: '10px' }} src="/images/icons/payment.svg" />
-          {toolbarWidth !== '100px' && (
-            <Body2
-              color="#add6dd"
-              style={{
-                width: '50%',
-                display: 'flex',
-                justifyContent: 'center',
-                transition: 'opacity 0.01s easy',
-                opacity: isExpanded ? 1 : 0,
-              }}
-            >
-              {t('Payment')}
-            </Body2>
-          )}
-        </MenuWrapper>
-      </Link>
-      <Link style={{ textDecoration: 'none' }} onClick={() => changeCurrentMenu('setting')} to="setting">
-        <MenuWrapper currentMenu={currentMenu === 'setting'}>
-          <img style={{ width: '55px', gap: '10px' }} src="/images/icons/setting.svg" />
-          {toolbarWidth !== '100px' && (
-            <Body2
-              color="#add6dd"
-              style={{
-                width: '50%',
-                display: 'flex',
-                justifyContent: 'center',
-                transition: 'opacity 0.01s easy',
-                opacity: isExpanded ? 1 : 0,
-              }}
-            >
-              {t('Setting')}
-            </Body2>
-          )}
-        </MenuWrapper>
-      </Link>
+      <div>
+        <Link style={{ textDecoration: 'none' }} onClick={() => changeCurrentMenu('setting')} to="setting">
+          <MenuWrapper currentMenu={currentMenu === 'setting'}>
+            <img style={{ width: '55px', gap: '10px' }} src="/images/icons/setting.svg" />
+            {toolbarWidth !== '100px' && (
+              <Body2
+                color="#add6dd"
+                style={{
+                  width: '50%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  transition: 'opacity 0.01s easy',
+                  opacity: isExpanded ? 1 : 0,
+                }}
+              >
+                {t('Setting')}
+              </Body2>
+            )}
+          </MenuWrapper>
+        </Link>
+      </div>
     </DashboardToolbar>
   );
 };

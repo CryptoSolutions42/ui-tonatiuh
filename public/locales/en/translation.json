@@ -31,5 +31,6 @@
   "isPercentTargetAfterTakeProfit": "Enable floating take profit mode",
   "isCapitalizeDeltaFromSale": "Redeem coins with delta",
   "isCoinAccumulation": "Accumulate Coins",
-  "isAutoStartTrading": "Auto Trading Mode"
+  "isAutoStartTrading": "Auto Trading Mode",
+  "Private data is not displayed": "Private data is not displayed"
 }

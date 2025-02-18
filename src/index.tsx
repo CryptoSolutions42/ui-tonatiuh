@@ -24,7 +24,6 @@ root.render(
         </Notification>
         {/* </PersistGate> */}
       </I18nextProvider>
-      ,
     </Provider>
   </BrowserRouter>,
 );

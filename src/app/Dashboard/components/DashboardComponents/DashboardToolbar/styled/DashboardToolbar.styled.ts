@@ -8,4 +8,7 @@ export const DashboardToolbar = styled.div<{ width?: string }>`
   background: rgb(26, 28, 31);
   transition: width 0.05s ease;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;

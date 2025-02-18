@@ -31,5 +31,6 @@
   "isPercentTargetAfterTakeProfit": "Habilitar el modo de toma de ganancias flotante",
   "isCapitalizeDeltaFromSale": "Canjear monedas con delta",
   "isCoinAccumulation": "Acumular monedas",
-  "isAutoStartTrading": "Modo de trading automático"
+  "isAutoStartTrading": "Modo de trading automático",
+  "Private data is not displayed": "Los datos privados no se muestran"
 }

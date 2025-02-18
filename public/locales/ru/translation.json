@@ -31,5 +31,6 @@
   "isPercentTargetAfterTakeProfit": "Режим плавающего профита",
   "isCapitalizeDeltaFromSale": "Возвращать дельту с продажи в монету",
   "isCoinAccumulation": "Накапливать монеты",
-  "isAutoStartTrading": "Автоматическая торговля"
+  "isAutoStartTrading": "Автоматическая торговля",
+  "Private data is not displayed": "Приватные данные не отображаются"
 }

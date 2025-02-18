@@ -124,6 +124,7 @@ const Dashboard: React.FC = () => {
             <Route path="/history" element={<h1>History</h1>} />
             <Route path="/license" element={<h1>License</h1>} />
             <Route path="/payment" element={<h1>Payment</h1>} />
+            <Route path="/setting" element={<h1>Setting</h1>} />
           </Routes>
         </DashboardBody>
       </DashboardContainer>
