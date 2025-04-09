@@ -56,7 +56,7 @@ export const DashboardToolbarComponent: React.FC = () => {
           <img
             onClick={toolbarHandleWidth}
             src="/images/logo/big-logo.png"
-            alt="Logo Tonatiuh"
+            alt="Logo Light"
             style={{
               cursor: 'pointer',
               backgroundColor: 'transparent',

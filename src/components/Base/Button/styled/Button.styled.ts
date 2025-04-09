@@ -76,7 +76,7 @@ const disabledSecondaryL = css`
   color: #b7bce4;
 `;
 
-export const StyledButton = styled.div<{ type: TypeButton; disabled?: boolean }>`
+export const StyledButton = styled.button<{ typeButton: TypeButton; disabled?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,16 +94,16 @@ export const StyledButton = styled.div<{ type: TypeButton; disabled?: boolean }>
   border: none;
   cursor: pointer;
 
-  ${({ type, disabled }: { type: TypeButton; disabled?: boolean }) =>
-    type === 'primary-l'
+  ${({ typeButton, disabled }: { typeButton: TypeButton; disabled?: boolean }) =>
+    typeButton === 'primary-l'
       ? disabled
         ? disabledPrimaryL
         : primaryL
-      : type === 'primary-b'
+      : typeButton === 'primary-b'
       ? disabled
         ? disabledPrimaryB
         : primaryB
-      : type === 'secondary-b'
+      : typeButton === 'secondary-b'
       ? disabled
         ? disabledSecondaryB
         : secondaryB

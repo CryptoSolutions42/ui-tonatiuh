@@ -51,7 +51,7 @@ export const ComplianceSection: FC<ComplianceSectionType> = ({
             <Button
               width="150px"
               handleClick={() => console.log('click')}
-              type={button.buttonType}
+              typeButton={button.buttonType}
               children={getButtonName(button.buttonName, isArrowIconInButton)}
             />
           </StyledComplianceSectionContent>

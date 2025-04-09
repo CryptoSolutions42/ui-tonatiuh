@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { useForm } from 'react-hook-form';
 
 import {
   ConfigForm,
@@ -10,10 +11,10 @@ import {
   StyledConfig,
   HiddenButtonWrapper,
 } from './styled/ConfigComponent.styled';
-import { ConfigType } from '../../../../redux/types';
-import { RootState } from '../../../../redux/store';
-import { Button, SH1 } from '../../../../components/Base';
-import { startsWithIs } from '../../../../utils/helper';
+import { ConfigType } from '@/redux/types';
+import { RootState } from '@/redux/store';
+import { Button, SH1 } from '@/components/Base';
+import { startsWithIs } from '@/utils/helper';
 import { configFields } from './config-fields';
 
 export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) => {
@@ -21,6 +22,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
   const [width, setWidth] = useState<string>('150px');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const inputRefs = useRef<Record<string, HTMLInputElement>>({});
+  const { register, handleSubmit } = useForm<{ [key: string]: number | string | boolean }>();
 
   function handleInputChange(configName: string) {
     const input = inputRefs.current[configName];
@@ -82,7 +84,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
           {t('Config')}
         </span>
       ) : (
-        <ConfigForm isVisible={isExpanded}>
+        <ConfigForm onSubmit={handleSubmit((data) => console.log(data))} isVisible={isExpanded}>
           <HiddenButtonWrapper>
             <SH1 color="#add6dd">{t('Config')}</SH1>
             <img
@@ -95,8 +97,8 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
             <FormGroup key={`input-config-${index + 1}`}>
               <LabelForm children={`${t(configName)}:`} />
               {configFields[configName]?.type === 'select' ? (
-                <select name={configName} onChange={() => handleInputChange(configName)}>
-                  {configFields[configName].options?.map((option) => (
+                <select {...register(configName)} name={configName}>
+                  {configFields[configName].options?.flatMap((option) => (
                     <option key={option} value={option}>
                       {option}
                     </option>
@@ -104,29 +106,20 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
                 </select>
               ) : (
                 <InputForm
+                  {...register(configName)}
                   type={configFields[configName]?.type || 'text'}
                   name={configName}
                   step={configFields[configName]?.type === 'number' ? configFields[configName].step : undefined}
-                  defaultValue={
-                    configFields[configName]?.type === 'checkbox'
-                      ? Boolean(+config[configName])
-                      : printNameInput(configName)
-                  }
+                  defaultChecked={configFields[configName]?.type === 'checkbox' ? config[configName] : undefined}
+                  defaultValue={configFields[configName]?.type === 'checkbox' ? undefined : printNameInput(configName)}
                   ref={(el) => {
                     if (el) inputRefs.current[configName] = el;
                   }}
-                  onChange={() => handleInputChange(configName)}
                 />
               )}
             </FormGroup>
           ))}
-          <Button
-            children={t('Update Config')}
-            handleClick={() => {
-              toolbarHandleWidth();
-            }}
-            type={'primary-b'}
-          />
+          <Button type="submit" children={t('Update Config')} typeButton={'primary-b'} />
         </ConfigForm>
       )}
     </StyledConfig>

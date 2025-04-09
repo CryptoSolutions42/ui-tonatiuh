@@ -8,6 +8,7 @@
   "History": "История",
   "License": "Лицензия",
   "Payment": "Платежи",
+  "Setting": "Настройки",
   "Trading start": "Начать торговлю",
   "Trading stop": "Остановка торговли",
   "Emergency stop": "Жесткая остановка",
@@ -32,5 +33,9 @@
   "isCapitalizeDeltaFromSale": "Возвращать дельту с продажи в монету",
   "isCoinAccumulation": "Накапливать монеты",
   "isAutoStartTrading": "Автоматическая торговля",
-  "Private data is not displayed": "Приватные данные не отображаются"
+  "Private data is not displayed": "Приватные данные не отображаются",
+  "To access the service, enter the license key.": "Для доступа к сервису введите лицензионный ключ.",
+  "Your license code": "Ваш лицензионный ключ",
+  "This field is required": "Это поле обязательно для заполнения",
+  "Minimum length is 5 characters": "Минимальная длина 5 символов"
 }

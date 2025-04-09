@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ConfigType, IAppState, NotificationType } from '../../types';
+import { BalanceType, ConfigType, IAppState, NotificationType, OrderType, SessionType } from '../../types';
 
 const initialState: IAppState = {
   isLoading: false,
@@ -14,8 +14,12 @@ const initialState: IAppState = {
   },
   userId: '',
   configs: [],
+  orders: [],
+  ordersForHistory: [],
   currentConfig: undefined,
   currentMenu: 'dashboard',
+  balance: [{} as BalanceType],
+  allSession: [{} as SessionType],
 };
 
 export const appStore = createSlice({
@@ -46,6 +50,21 @@ export const appStore = createSlice({
     },
     setCurrentMenu(state, { payload }: PayloadAction<string>) {
       state.currentMenu = payload;
+    },
+    setOrders(state, { payload }: PayloadAction<OrderType[]>) {
+      state.orders = payload;
+    },
+    setOrdersForHistory(state, { payload }: PayloadAction<{ indexSession: string; orders: OrderType[] }>) {
+      state.ordersForHistory.push(payload);
+    },
+    clearOrdersForHistory(state) {
+      state.ordersForHistory = [];
+    },
+    setBalance(state, { payload }: PayloadAction<BalanceType[]>) {
+      state.balance = payload;
+    },
+    setSession(state, { payload }: PayloadAction<SessionType[]>) {
+      state.allSession = payload;
     },
   },
 });

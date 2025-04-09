@@ -6,10 +6,10 @@ export const ManagementComponent = () => {
   const { t } = useTranslation();
   return (
     <StyledManagementComponent>
-      <Button type="primary-b" handleClick={() => console.log('work')} children={t('Trading start')} />
-      <Button type="primary-b" handleClick={() => console.log('work')} children={t('Trading stop')} />
-      <Button type="primary-b" handleClick={() => console.log('work')} children={t('Balance distribution')} />
-      <Button type="primary-b" handleClick={() => console.log('work')} children={t('Emergency stop')} />
+      <Button typeButton="primary-b" handleClick={() => console.log('work')} children={t('Trading start')} />
+      <Button typeButton="primary-b" handleClick={() => console.log('work')} children={t('Trading stop')} />
+      <Button typeButton="primary-b" handleClick={() => console.log('work')} children={t('Balance distribution')} />
+      <Button typeButton="primary-b" handleClick={() => console.log('work')} children={t('Emergency stop')} />
     </StyledManagementComponent>
   );
 };

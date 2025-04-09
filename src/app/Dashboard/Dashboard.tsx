@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useForm } from 'react-hook-form';
 
-import { RootState } from '../../redux/store';
+import { RootState } from '@/redux/store';
+import { SelectLanguageContainer } from '@/components/Base/SelectLanguage/SelectLanguage';
+import { convertSymbol, startsWithIs } from '@/utils/helper';
+import { Button, ModalWindow, SH1 } from '@/components/Base';
+import { appStoreActions } from '@/redux/reducer/app-reducer/reducer';
+import { AppSagaAction } from '@/redux/saga/app-saga/saga-actions';
+
 import {
   DashboardBody,
   StyledDashboard,
@@ -13,16 +20,16 @@ import {
   DashboardEmpty,
   DashboardEmptyImage,
 } from './styled/Dashboard.styled';
-import { TradingViewChart } from './components/TradingViewChart/TradingViewChart';
-import { ConfigComponent } from './components/ConfigComponent/ConfigComponent';
-import { PanelComponent } from './components/PanelComponent/PanelComponent';
-import { SelectLanguageContainer } from '../../components/Base/SelectLanguage/SelectLanguage';
-import { convertSymbol, startsWithIs } from '../../utils/helper';
 import { DashboardToolbarComponent } from './components/DashboardComponents/DashboardToolbar/DashboardToolbar';
 import { Tabs } from './components/DashboardComponents/Tabs/Tabs';
-import { Button, ModalWindow, SH1 } from '../../components/Base';
-import { appStoreActions } from '../../redux/reducer/app-reducer/reducer';
 import { FormGroup, InputForm, LabelForm } from './components/ConfigComponent/styled/ConfigComponent.styled';
+import { ConfigComponent } from './components/ConfigComponent/ConfigComponent';
+import { TradingViewChart } from './components/TradingViewChart/TradingViewChart';
+import { PanelComponent } from './components/PanelComponent/PanelComponent';
+import { StatisticComponent } from './components/StatisticComponent/StatisticComponent';
+import { HistoryComponent } from './components/HistoryComponent/HistoryComponent';
+import { Payment } from './components/Payment';
+import { License } from './components/License';
 
 const createConfigFields = [
   'apiKey',
@@ -31,9 +38,9 @@ const createConfigFields = [
   'symbol',
   'positionSize',
   'percentBuyBackStep',
-  'isFibonacci',
   'percentProfit',
   'candlePriceRange',
+  'isFibonacci',
   'isPercentTargetAfterTakeProfit',
   'isCapitalizeDeltaFromSale',
   'isCoinAccumulation',
@@ -45,27 +52,33 @@ const createConfigFields = [
 const Dashboard: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { currentConfig, configs, modalWindow } = useSelector((state: RootState) => state.AppReducer);
+  const { currentConfig, configs, modalWindow, orders, allSession } = useSelector(
+    (state: RootState) => state.AppReducer,
+  );
+  const { register, handleSubmit } = useForm<{
+    [key: string]: number | string | boolean;
+  }>();
 
-  function toogleCreateConfigWindow() {
+  function toggleCreateConfigWindow(data) {
     dispatch(
       appStoreActions.toggleModal({
         modalType: 'create-config',
         isOpenModal: !modalWindow.isOpenModal,
       }),
     );
-    console.log('createConfig');
+    console.log(data);
   }
 
   function generateConfigFormForCreate() {
     return (
       <>
         <SH1 color="#add6dd">{t('Create Config')}</SH1>
-        <form>
+        <form onSubmit={handleSubmit(toggleCreateConfigWindow)}>
           {createConfigFields.flatMap((configName, index) => (
             <FormGroup key={`input-config-${index + 1}`}>
               <LabelForm children={`${t(configName)}:`} />
               <InputForm
+                {...register(configName)}
                 type={startsWithIs(configName) ? 'checkbox' : 'text'}
                 name={configName}
                 placeholder={configName}
@@ -73,17 +86,19 @@ const Dashboard: React.FC = () => {
             </FormGroup>
           ))}
           <Button
+            type="submit"
             children={t('Create Config')}
-            handleClick={() => {
-              console.log('create config!');
-              toogleCreateConfigWindow();
-            }}
-            type={'primary-b'}
+            typeButton={'primary-b'}
           />
         </form>
       </>
     );
   }
+
+  useEffect(() => {
+    dispatch(AppSagaAction.getAllSession());
+    currentConfig && dispatch(AppSagaAction.getOrders(currentConfig.id));
+  }, [currentConfig]);
 
   return (
     <StyledDashboard>
@@ -106,7 +121,7 @@ const Dashboard: React.FC = () => {
                 configs.length && currentConfig ? (
                   <>
                     <TradingComponent>
-                      <TradingViewChart symbol={convertSymbol(currentConfig.symbol)} interval="1H" />
+                      <TradingViewChart symbol={convertSymbol(currentConfig.symbol)} interval="1H" orders={orders} />
                       <ConfigComponent config={currentConfig} />
                     </TradingComponent>
                     <PanelComponent config={currentConfig} />
@@ -114,17 +129,16 @@ const Dashboard: React.FC = () => {
                 ) : (
                   <>
                     <DashboardEmpty>
-                      <DashboardEmptyImage onClick={toogleCreateConfigWindow} src="/images/icons/plus-file.svg" />
+                      <DashboardEmptyImage onClick={toggleCreateConfigWindow} src="/images/icons/plus-file.svg" />
                     </DashboardEmpty>
                   </>
                 )
               }
             />
-            <Route path="/statistic" element={<h1>Statistic</h1>} />
-            <Route path="/history" element={<h1>History</h1>} />
-            <Route path="/license" element={<h1>License</h1>} />
-            <Route path="/payment" element={<h1>Payment</h1>} />
-            <Route path="/setting" element={<h1>Setting</h1>} />
+            <Route path="/statistic" element={<StatisticComponent />} />
+            <Route path="/history" element={<HistoryComponent allSession={allSession} />} />
+            {/* <Route path="/payment" element={<Payment />} /> */}
+            <Route path="/license" element={<License />} />
           </Routes>
         </DashboardBody>
       </DashboardContainer>

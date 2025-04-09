@@ -40,7 +40,7 @@ export const HelloSection: FC<HelloSectionType> = ({
             </HeadDescriptionWrapper>
             {isButtonConnect && (
               <Button
-                type={button.buttonType}
+                typeButton={button.buttonType}
                 children={button.buttonName ?? defaultButtonName}
                 handleClick={() => {
                   console.log('Click!');

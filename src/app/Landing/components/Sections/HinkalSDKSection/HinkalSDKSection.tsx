@@ -42,7 +42,7 @@ export const HinkalSDKSection: FC<HinkalSDKSectionType> = ({ firstBlock, secondB
               handleClick={() => {
                 console.log('Click!');
               }}
-              type={firstButton.buttonType}
+              typeButton={firstButton.buttonType}
             />
           </StyledContentWrapper>
           <HorizonOrVerticalLine />
@@ -56,7 +56,7 @@ export const HinkalSDKSection: FC<HinkalSDKSectionType> = ({ firstBlock, secondB
               handleClick={() => {
                 console.log('Click!');
               }}
-              type={secondButton.buttonType}
+              typeButton={secondButton.buttonType}
             />
           </StyledContentWrapper>
         </StyledHinkalSDKSection>

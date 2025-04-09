@@ -1,12 +1,17 @@
 import { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { io, Socket } from 'socket.io-client';
 import { StyledLoggerComponent } from './styled/LoggerConponent.styled';
 import { ConfigType } from '../../../../../../redux/types';
 import { LoggerType } from './types/types';
+import { appStoreActions } from '../../../../../../redux/reducer/app-reducer/reducer';
+import { RootState } from '../../../../../../redux/store';
 
 const SOCKET_SERVER_URL = 'ws://localhost:5001';
 
 export const LoggerComponent: FC<{ config: ConfigType }> = ({ config }) => {
+  const dispatch = useDispatch();
+  const { orders } = useSelector((state: RootState) => state.AppReducer);
   const [log, setLog] = useState<LoggerType>({} as LoggerType);
 
   useEffect(() => {
@@ -30,7 +35,11 @@ export const LoggerComponent: FC<{ config: ConfigType }> = ({ config }) => {
     <StyledLoggerComponent>
       <h2>Логи:</h2>
       {Object.keys(log).length > 0 ? (
-        Object.keys(log).flatMap((keyLog, index) => <div key={`log-${index}`}>{keyLog}: {log[keyLog].toString()}</div>)
+        Object.keys(log).flatMap((keyLog, index) => (
+          <div key={`log-${index}`}>
+            {keyLog}: {log[keyLog].toString()}
+          </div>
+        ))
       ) : (
         <div>{'> Тут будут логи'}</div>
       )}

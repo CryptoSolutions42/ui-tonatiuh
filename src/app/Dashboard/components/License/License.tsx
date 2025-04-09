@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import styled from 'styled-components';
 
@@ -7,13 +9,6 @@ import { Payment } from '../Payment';
 import { appStoreActions } from '../../../../redux/reducer/app-reducer/reducer';
 import { Button, Card, H1, ModalWindow } from '../../../../components/Base';
 import { RootState } from '../../../../redux/store';
-
-const options = [
-  { value: 1, label: '1' },
-  { value: 3, label: '3' },
-  { value: 5, label: '5' },
-  { value: 10, label: '10' },
-];
 
 const LicensePage = styled.div`
   display: flex;
@@ -31,130 +26,91 @@ const LicenseTag = styled.div`
   flex-wrap: wrap;
 `;
 
-const LicenseHead = styled.div`
-  width: 300px;
-  font-weight: 600;
-  font-size: 25px;
-  margin-bottom: 30px;
-`;
+const AnimatedTitle = styled.h1<{ color: string; textLength: number }>`
+  margin-bottom: 50px;
+  font-family: 'Mazzard';
+  font-style: normal;
+  font-weight: 500;
+  line-height: 65px;
+  font-size: 50px;
+  color: ${({ color }) => color};
+  position: relative;
 
-const LicenseDescription = styled.li``;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #15aab2;
+    animation: blink 0.7s infinite;
+  }
 
-const Price = styled.div`
-  padding: 50px 0 50px 0;
-  font-size: 25px;
-  font-weight: 600;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  align-items: center;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(33, 35, 39);
+    border-left: 2px solid #15aab2;
+    animation: typing 3s steps(${(props) => props.textLength}) forwards;
+  }
+
+  @keyframes typing {
+    100% {
+      left: 100%;
+      width: 0;
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
 `;
 
 export const License = () => {
-  const dispatch = useDispatch();
-  const [threads, setThreads] = useState([1, 1, 1]);
-  const [amount, setAmount] = useState(0);
-  const { AppReducer } = useSelector((state: RootState) => state);
-  const { modalWindow, userId } = AppReducer;
+  const { t } = useTranslation();
+  const { register, handleSubmit } = useForm<{ licenseKey: string }>();
 
-  const mockTariff = [
-    {
-      period: 'Лицензия на 3 месяц',
-      description: [
-        'Доступ ко всему функционалу',
-        '1 поток 1 торговая пара',
-        'Отсутствие ограничений доходности',
-        'Безопасность данных клиента',
-      ],
-      price: 200 * threads[0],
-    },
-    {
-      period: 'Лицензия на 6 месяцев',
-      description: [
-        'Доступ ко всему функционалу',
-        '1 поток 1 торговая пара',
-        'Отсутствие ограничений доходности',
-        'Безопасность данных клиента',
-      ],
-      price: 400 * threads[1],
-    },
-    {
-      period: 'Лицензия на 1 год',
-      description: [
-        'Доступ ко всему функционалу',
-        '1 поток 1 торговая пара',
-        'Отсутствие ограничений доходности',
-        'Безопасность данных клиента',
-      ],
-      price: 800 * threads[2],
-    },
-  ];
+  function onSubmit(data: { licenseKey: string }) {
+    console.log(data);
+  }
 
-  useEffect(() => {
-    console.log('effect license');
-  });
+  const headerText = t('To access the service, enter the license key.');
 
   return (
     <LicensePage>
-      <H1 color="white" marginBottom="100px">
-        Для доступа к сервису выберите тариф
-      </H1>
-      <LicenseTag>
-        {mockTariff.flatMap((tariff, index) => {
-          return (
-            <Card
-              key={`key_${index}`}
-              children={
-                <Fragment>
-                  <LicenseHead>{tariff.period}</LicenseHead>
-                  <ul>
-                    {tariff.description.flatMap((description) => (
-                      <LicenseDescription>{description}</LicenseDescription>
-                    ))}
-                  </ul>
-                  <div style={{ marginTop: '20px' }}>Колличество потоков</div>
-                  <Select
-                    theme={(theme) => ({
-                      ...theme,
-                      colors: {
-                        ...theme.colors,
-                        neutral0: '#efccc7',
-                        primary25: '#e0702a',
-                        primary: 'white',
-                      },
-                    })}
-                    defaultValue={options[0]}
-                    options={options}
-                    onChange={(value) => {
-                      threads[index] = value?.value ?? 1;
-                      setThreads([...threads]);
-                    }}
-                  />
-                  <Price>${tariff.price}</Price>
-                  <Button
-                    children={'Купить'}
-                    handleClick={() => {
-                      setAmount(tariff.price);
-                      dispatch(
-                        appStoreActions.toggleModal({
-                          modalType: 'payment',
-                          isOpenModal: !modalWindow.isOpenModal,
-                        }),
-                      );
-                    }}
-                    type={'primary-b'}
-                  />
-                </Fragment>
-              }
-            />
-          );
-        })}
-      </LicenseTag>
-      {modalWindow.isOpenModal && modalWindow.modalType === 'payment' ? (
-        <ModalWindow children={<Payment userId={userId} amount={amount} />} />
-      ) : (
-        <></>
-      )}
+      <AnimatedTitle color="#addadd" textLength={headerText.length}>
+        {headerText}
+      </AnimatedTitle>
+      <form style={{ display: 'flex', gap: '20px' }} onSubmit={handleSubmit(onSubmit)}>
+        <input
+          style={{
+            width: '450px',
+            height: '45px',
+            border: '2px solid rgb(24, 150, 178)',
+            borderRadius: '10px',
+            padding: '10px',
+            boxShadow: '-1px 0px 17px 13px rgba(25, 152, 152, 0.2)',
+          }}
+          type="text"
+          placeholder={String(t('Your license code'))}
+          {...register('licenseKey', {
+            required: String(t('This field is required')),
+            minLength: {
+              value: 5,
+              message: String(t('Minimum length is 5 characters')),
+            },
+          })}
+        />
+        <Button children="Submit" typeButton="primary-b" type="submit" />
+      </form>
+      <LicenseTag></LicenseTag>
     </LicensePage>
   );
 };

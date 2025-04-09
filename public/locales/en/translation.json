@@ -11,6 +11,7 @@
   "Trading start": "Trading start",
   "Trading stop": "Trading stop",
   "Emergency stop": "Emergency stop",
+  "Setting": "Setting",
   "Balance distribution": "Balance distribution",
   "apiKey": "Api key",
   "privateKey": "Private key",
@@ -32,5 +33,9 @@
   "isCapitalizeDeltaFromSale": "Redeem coins with delta",
   "isCoinAccumulation": "Accumulate Coins",
   "isAutoStartTrading": "Auto Trading Mode",
-  "Private data is not displayed": "Private data is not displayed"
+  "Private data is not displayed": "Private data is not displayed",
+  "To access the service, enter the license key.": "To access the service, enter the license key.",
+  "Your license code": "Your license code",
+  "This field is required": "This field is required",
+  "Minimum length is 5 characters": "Minimum length is 5 characters"
 }

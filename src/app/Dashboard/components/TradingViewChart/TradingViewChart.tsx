@@ -3,9 +3,19 @@ import { ColorType, createChart, CrosshairMode, LineStyle } from 'lightweight-ch
 
 import { StyledTradingViewChart } from './styled/TradingViewChart.styled';
 import { getCandlestickData } from '../../../../utils/helper';
+import { OrderType } from '../../../../redux/types';
 
-export const TradingViewChart = ({ symbol, interval }) => {
+export const TradingViewChart = ({
+  symbol,
+  interval,
+  orders = [],
+}: {
+  symbol: string;
+  interval: string;
+  orders: OrderType[];
+}) => {
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
+  const orderLinesRef = useRef<any[]>([]);
 
   useEffect(() => {
     if (!chartContainerRef.current) return;
@@ -55,10 +65,28 @@ export const TradingViewChart = ({ symbol, interval }) => {
       wickDownColor: '#d13159',
     });
 
+    const updateOrderLines = () => {
+      orderLinesRef.current.forEach((line) => candlestickSeries.removePriceLine(line));
+      orderLinesRef.current = [];
+
+      orders.forEach((order) => {
+        const orderLine = candlestickSeries.createPriceLine({
+          price: order.price,
+          color: order.side === 'buy' ? '#12a7a2' : '#d13159',
+          lineWidth: 2,
+          lineStyle: LineStyle.Dashed,
+          axisLabelVisible: true,
+          title: `${order.side} @ ${order.price}`,
+        });
+        orderLinesRef.current.push(orderLine);
+      });
+    };
+
     const fetchData = async () => {
       const data = await getCandlestickData(symbol, interval);
       console.log('Candlestick Data:', data);
       candlestickSeries.setData(data);
+      updateOrderLines();
     };
 
     fetchData();
@@ -71,10 +99,12 @@ export const TradingViewChart = ({ symbol, interval }) => {
     };
 
     window.addEventListener('resize', handleResize);
+    updateOrderLines();
 
     return () => {
       clearInterval(intervalId);
       window.removeEventListener('resize', handleResize);
+      orderLinesRef.current.forEach((line) => candlestickSeries.removePriceLine(line));
       chart.remove();
     };
   }, [symbol, interval]);

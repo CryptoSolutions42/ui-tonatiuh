@@ -8,6 +8,7 @@
   "History": "Historia",
   "License": "Licencia",
   "Payment": "Pago",
+  "Setting": "Setting",
   "Trading start": "Inicio de la negociación",
   "Trading stop": "Dejar de operar",
   "Emergency stop": "Parada de emergencia",
@@ -32,5 +33,9 @@
   "isCapitalizeDeltaFromSale": "Canjear monedas con delta",
   "isCoinAccumulation": "Acumular monedas",
   "isAutoStartTrading": "Modo de trading automático",
-  "Private data is not displayed": "Los datos privados no se muestran"
+  "Private data is not displayed": "Los datos privados no se muestran",
+  "To access the service, enter the license key.": "Para acceder al servicio, introduzca la clave de licencia.",
+  "Your license code": "Su código de licencia",
+  "This field is required": "Este campo es obligatorio",
+  "Minimum length is 5 characters": "La longitud mínima es de 5 caracteres"
 }

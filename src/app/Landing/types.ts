@@ -125,8 +125,9 @@ export type TypeButton = 'primary-l' | 'primary-b' | 'secondary-l' | 'secondary-
 
 export type ButtonType = {
   children: JSX.Element | string | any;
-  handleClick: () => void;
-  type: TypeButton;
+  handleClick?: () => void;
+  typeButton: TypeButton;
+  type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   width?: string;
 };

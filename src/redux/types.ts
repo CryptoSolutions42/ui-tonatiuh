@@ -1,3 +1,12 @@
+import { Order } from 'ccxt';
+
+export type BalanceType = {
+  usdt: number;
+  profitAll: number;
+  profitUsdt: number;
+  balanceObject: string;
+};
+
 export type NotificationType = {
   isActive?: boolean;
   mode?: 'success' | 'info' | 'error';
@@ -15,6 +24,10 @@ export interface IAppState {
   configs: ConfigType[];
   currentConfig?: ConfigType;
   currentMenu: string;
+  orders: OrderType[];
+  ordersForHistory: { indexSession: string; orders: OrderType[] }[];
+  balance: BalanceType[];
+  allSession: SessionType[];
 }
 
 export type ConfigType = {
@@ -43,4 +56,21 @@ export type ConfigType = {
   balanceDistribution: boolean;
   exchange: 'okx' | 'binance' | 'bitget' | 'kucoin' | 'mexc' | 'poloniex' | 'gate' | 'exmo' | 'bybit';
   loggerEvent: string;
+};
+
+export type SessionType = {
+  indexSession: string;
+  isActive: boolean;
+};
+
+export type OrderType = {
+  id: number;
+  orderId: string;
+  order: Order;
+  createAt: number;
+  price: number;
+  amount: number;
+  side: 'buy' | 'sell';
+  symbol: string;
+  isActive: number;
 };
