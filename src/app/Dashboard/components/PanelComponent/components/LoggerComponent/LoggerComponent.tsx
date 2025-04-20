@@ -7,7 +7,7 @@ import { LoggerType } from './types/types';
 import { appStoreActions } from '../../../../../../redux/reducer/app-reducer/reducer';
 import { RootState } from '../../../../../../redux/store';
 
-const SOCKET_SERVER_URL = 'ws://localhost:5001';
+const SOCKET_SERVER_URL = 'ws://localhost';
 
 export const LoggerComponent: FC<{ config: ConfigType }> = ({ config }) => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export const LoggerComponent: FC<{ config: ConfigType }> = ({ config }) => {
   const [log, setLog] = useState<LoggerType>({} as LoggerType);
 
   useEffect(() => {
-    const socket: Socket = io(SOCKET_SERVER_URL + config.id);
+    const socket: Socket = io(`${SOCKET_SERVER_URL}:${5001 + config.id}`);
 
     socket.on('connect', () => {
       console.log('Connected to logger server, socket id:', socket.id);

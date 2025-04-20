@@ -2,11 +2,18 @@ import { call, put } from 'redux-saga/effects';
 
 import { appStoreActions } from '../../reducer/app-reducer/reducer';
 import { BalanceType, ConfigType, NotificationType, OrderType, SessionType } from '../../types';
-import { apiGetConfigs } from '../../api/config/config.api';
+import {
+  apiCreateConfig,
+  apiDisableAutostart,
+  apiEmergencyStop,
+  apiGetConfigs,
+  apiUpdateConfig,
+} from '../../api/config/config.api';
 import { AppSagaAction } from './saga-actions';
 import { apiGetSessionByConfigId, apiGetAllSession } from '../../api/session/session.api';
 import { apiGetAllOrdersByIndexOperation } from '../../api/operation/operation.api';
 import { apiGetBalance } from '../../api/balance/balance.api';
+import { apiStartTrading, apiStopTrading } from '@/redux/api/trading/trading.api';
 
 /**
  * @description hardcode duration on 5000 ms
@@ -32,6 +39,98 @@ export function* getConfigs() {
         isActive: true,
         mode: 'success',
         message: 'Configurations successfully loaded',
+      }),
+    );
+  } catch (error) {
+    yield call(errorProcessing, error);
+  }
+}
+
+export function* createConfig({ payload }: { payload: ConfigType }) {
+  try {
+    yield call(apiCreateConfig, payload);
+    yield put(
+      appStoreActions.notification({
+        isActive: true,
+        mode: 'success',
+        message: 'Configuration successfully created',
+      }),
+    );
+  } catch (error) {
+    yield call(errorProcessing, error);
+  }
+}
+
+export function* updateConfig({ payload }: { payload: ConfigType }) {
+  try {
+    yield call(apiUpdateConfig, payload);
+    yield put(
+      appStoreActions.notification({
+        isActive: true,
+        mode: 'success',
+        message: 'Configuration successfully updated',
+      }),
+    );
+  } catch (error) {
+    yield call(errorProcessing, error);
+  }
+}
+
+export function* disableAutostart({ payload }: { payload: number }) {
+  try {
+    yield call(apiDisableAutostart, payload);
+    yield put(
+      appStoreActions.notification({
+        isActive: true,
+        mode: 'success',
+        message: 'Autostart trading behavior is disabled',
+      }),
+    );
+  } catch (error) {
+    yield call(errorProcessing, error);
+  }
+}
+
+export function* emergencyStop({ payload }: { payload: number }) {
+  try {
+    yield call(apiEmergencyStop, payload);
+    yield put(
+      appStoreActions.notification({
+        isActive: true,
+        mode: 'success',
+        message: 'Trading is emergency stop',
+      }),
+    );
+  } catch (error) {
+    yield call(errorProcessing, error);
+  }
+}
+
+export function* startTrading({ payload }: { payload: number }) {
+  try {
+    console.log('StartTrading =>', payload);
+
+    yield call(apiStartTrading, payload);
+    yield put(
+      appStoreActions.notification({
+        isActive: true,
+        mode: 'success',
+        message: 'Trading is sucessfully started',
+      }),
+    );
+  } catch (error) {
+    yield call(errorProcessing, error);
+  }
+}
+
+export function* stopTrading({ payload }: { payload: number }) {
+  try {
+    yield call(apiStopTrading, payload);
+    yield put(
+      appStoreActions.notification({
+        isActive: true,
+        mode: 'success',
+        message: 'Trading is stop',
       }),
     );
   } catch (error) {

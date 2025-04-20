@@ -11,11 +11,11 @@ export const StyledConfig = styled.div<{ width?: string }>`
   transition: width 0.05s ease;
 `;
 
-export const ConfigForm = styled.form<{ isVisible: boolean }>`
+export const ConfigForm = styled.form<{ isVisible?: boolean; maxHeight?: string }>`
   padding: 20px;
   width: 100%;
   height: 100%;
-  max-height: 536px;
+  max-height: ${({ maxHeight }) => (maxHeight ? maxHeight : '536px')};
   overflow-y: auto;
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   transition: opacity 0.05s ease;
