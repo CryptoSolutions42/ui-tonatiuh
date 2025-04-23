@@ -77,7 +77,7 @@ export const DashboardToolbarComponent: React.FC = () => {
                 style={{
                   width: '50%',
                   display: 'flex',
-                  justifyContent: 'center',
+                  justifyContent: 'flex-start',
                   transition: 'opacity 0.01s easy',
                   opacity: isExpanded ? 1 : 0,
                 }}
@@ -96,7 +96,7 @@ export const DashboardToolbarComponent: React.FC = () => {
                 style={{
                   width: '50%',
                   display: 'flex',
-                  justifyContent: 'center',
+                  justifyContent: 'flex-start',
                   transition: 'opacity 0.01s easy',
                   opacity: isExpanded ? 1 : 0,
                 }}
@@ -115,7 +115,7 @@ export const DashboardToolbarComponent: React.FC = () => {
                 style={{
                   width: '50%',
                   display: 'flex',
-                  justifyContent: 'center',
+                  justifyContent: 'flex-start',
                   transition: 'opacity 0.01s easy',
                   opacity: isExpanded ? 1 : 0,
                 }}
@@ -134,7 +134,7 @@ export const DashboardToolbarComponent: React.FC = () => {
                 style={{
                   width: '50%',
                   display: 'flex',
-                  justifyContent: 'center',
+                  justifyContent: 'flex-start',
                   transition: 'opacity 0.01s easy',
                   opacity: isExpanded ? 1 : 0,
                 }}
@@ -153,7 +153,7 @@ export const DashboardToolbarComponent: React.FC = () => {
                 style={{
                   width: '50%',
                   display: 'flex',
-                  justifyContent: 'center',
+                  justifyContent: 'flex-start',
                   transition: 'opacity 0.01s easy',
                   opacity: isExpanded ? 1 : 0,
                 }}
@@ -174,7 +174,7 @@ export const DashboardToolbarComponent: React.FC = () => {
                 style={{
                   width: '50%',
                   display: 'flex',
-                  justifyContent: 'center',
+                  justifyContent: 'flex-start',
                   transition: 'opacity 0.01s easy',
                   opacity: isExpanded ? 1 : 0,
                 }}

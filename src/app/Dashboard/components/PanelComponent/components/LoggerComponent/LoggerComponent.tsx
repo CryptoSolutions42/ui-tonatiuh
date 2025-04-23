@@ -29,7 +29,7 @@ export const LoggerComponent: FC<{ config: ConfigType }> = ({ config }) => {
     return () => {
       socket.disconnect();
     };
-  }, [config]);
+  }, [config, log]);
 
   return (
     <StyledLoggerComponent>

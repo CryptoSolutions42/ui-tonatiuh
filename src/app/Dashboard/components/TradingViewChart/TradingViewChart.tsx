@@ -12,7 +12,7 @@ export const TradingViewChart = ({
 }: {
   symbol: string;
   interval: string;
-  orders: OrderType[];
+  orders?: OrderType[];
 }) => {
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
   const orderLinesRef = useRef<any[]>([]);
@@ -107,7 +107,7 @@ export const TradingViewChart = ({
       orderLinesRef.current.forEach((line) => candlestickSeries.removePriceLine(line));
       chart.remove();
     };
-  }, [symbol, interval]);
+  }, [symbol, interval, orders]);
 
   return <StyledTradingViewChart ref={chartContainerRef} />;
 };

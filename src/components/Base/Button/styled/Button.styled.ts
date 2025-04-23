@@ -63,8 +63,9 @@ const disabledPrimaryL = css`
   color: #eaedfe;
 `;
 const disabledPrimaryB = css`
-  background-color: #b1a5ff;
+  background-color: rgb(18, 66, 76);
   color: #e0e3ff;
+  border-radius: 10px;
 `;
 const disabledSecondaryB = css`
   background-color: #b1a5ff;

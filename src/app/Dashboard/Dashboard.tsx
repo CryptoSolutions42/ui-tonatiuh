@@ -31,6 +31,7 @@ import { HistoryComponent } from './components/HistoryComponent/HistoryComponent
 import { Payment } from './components/Payment';
 import { License } from './components/License';
 import { ConfigType } from '@/redux/types';
+import { SettingComponent } from './components/SettingComponent/SettingComponent';
 
 const createConfigFields = [
   'apiKey',
@@ -221,7 +222,11 @@ const Dashboard: React.FC = () => {
                 configs.length && currentConfig ? (
                   <>
                     <TradingComponent>
-                      <TradingViewChart symbol={convertSymbol(currentConfig.symbol)} interval="1H" orders={orders} />
+                      <TradingViewChart
+                        symbol={convertSymbol(currentConfig.symbol)}
+                        interval="1H"
+                        orders={orders[0].symbol === currentConfig.symbol ? orders : undefined}
+                      />
                       <ConfigComponent config={currentConfig} />
                     </TradingComponent>
                     <PanelComponent config={currentConfig} />
@@ -239,6 +244,7 @@ const Dashboard: React.FC = () => {
             <Route path="/history" element={<HistoryComponent allSession={allSession} />} />
             {/* <Route path="/payment" element={<Payment />} /> */}
             <Route path="/license" element={<License />} />
+            <Route path="/setting" element={<SettingComponent />} />
           </Routes>
         </DashboardBody>
       </DashboardContainer>

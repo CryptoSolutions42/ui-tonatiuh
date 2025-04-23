@@ -30,6 +30,8 @@ export interface IAppState {
   allSession: SessionType[];
 }
 
+export type SettingType = { urlTrading: string; wsUrl: string };
+
 export type ConfigType = {
   id: number;
   apiKey?: string;
