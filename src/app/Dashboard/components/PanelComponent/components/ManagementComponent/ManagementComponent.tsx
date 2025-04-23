@@ -20,7 +20,6 @@ export const ManagementComponent: FC<{ idConfig: number }> = ({ idConfig }) => {
   return (
     <StyledManagementComponent>
       <Button
-        disabled={currentConfig?.id === idConfig && orders.length > 0 ? true : false}
         typeButton="primary-b"
         handleClick={async () => {
           await apiStartTrading(idConfig);

@@ -222,11 +222,7 @@ const Dashboard: React.FC = () => {
                 configs.length && currentConfig ? (
                   <>
                     <TradingComponent>
-                      <TradingViewChart
-                        symbol={convertSymbol(currentConfig.symbol)}
-                        interval="1H"
-                        orders={orders[0].symbol === currentConfig.symbol ? orders : undefined}
-                      />
+                      <TradingViewChart symbol={convertSymbol(currentConfig.symbol)} interval="1H" />
                       <ConfigComponent config={currentConfig} />
                     </TradingComponent>
                     <PanelComponent config={currentConfig} />

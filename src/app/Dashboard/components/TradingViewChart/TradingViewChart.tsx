@@ -1,19 +1,13 @@
 import React, { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import { ColorType, createChart, CrosshairMode, LineStyle } from 'lightweight-charts';
 
 import { StyledTradingViewChart } from './styled/TradingViewChart.styled';
 import { getCandlestickData } from '../../../../utils/helper';
 import { OrderType } from '../../../../redux/types';
+import { RootState } from '@/redux/store';
 
-export const TradingViewChart = ({
-  symbol,
-  interval,
-  orders = [],
-}: {
-  symbol: string;
-  interval: string;
-  orders?: OrderType[];
-}) => {
+export const TradingViewChart = ({ symbol, interval }: { symbol: string; interval: string }) => {
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
   const orderLinesRef = useRef<any[]>([]);
 
@@ -65,28 +59,10 @@ export const TradingViewChart = ({
       wickDownColor: '#d13159',
     });
 
-    const updateOrderLines = () => {
-      orderLinesRef.current.forEach((line) => candlestickSeries.removePriceLine(line));
-      orderLinesRef.current = [];
-
-      orders.forEach((order) => {
-        const orderLine = candlestickSeries.createPriceLine({
-          price: order.price,
-          color: order.side === 'buy' ? '#12a7a2' : '#d13159',
-          lineWidth: 2,
-          lineStyle: LineStyle.Dashed,
-          axisLabelVisible: true,
-          title: `${order.side} @ ${order.price}`,
-        });
-        orderLinesRef.current.push(orderLine);
-      });
-    };
-
     const fetchData = async () => {
       const data = await getCandlestickData(symbol, interval);
       console.log('Candlestick Data:', data);
       candlestickSeries.setData(data);
-      updateOrderLines();
     };
 
     fetchData();
@@ -99,7 +75,6 @@ export const TradingViewChart = ({
     };
 
     window.addEventListener('resize', handleResize);
-    updateOrderLines();
 
     return () => {
       clearInterval(intervalId);
@@ -107,7 +82,7 @@ export const TradingViewChart = ({
       orderLinesRef.current.forEach((line) => candlestickSeries.removePriceLine(line));
       chart.remove();
     };
-  }, [symbol, interval, orders]);
+  }, [symbol, interval]);
 
   return <StyledTradingViewChart ref={chartContainerRef} />;
 };
