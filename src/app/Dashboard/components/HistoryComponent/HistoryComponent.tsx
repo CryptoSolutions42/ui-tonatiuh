@@ -20,7 +20,7 @@ export const HistoryComponent: React.FC<{ allSession: SessionType[] }> = ({ allS
   }, []);
 
   return (
-    <>
+    <div>
       <div style={{ margin: '20px', color: '#addadd' }}>
         <h2>History session</h2>
       </div>
@@ -72,6 +72,6 @@ export const HistoryComponent: React.FC<{ allSession: SessionType[] }> = ({ allS
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };

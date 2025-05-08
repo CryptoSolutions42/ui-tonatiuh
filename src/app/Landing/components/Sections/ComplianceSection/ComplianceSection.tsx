@@ -6,8 +6,7 @@ import {
   StyledContent,
 } from './styled/ComplianceSection.styled';
 import { ComplianceSectionType } from '../../../types';
-import { Section } from '../../../../../components';
-import { H3, Body3, Button } from '../../../../../components/Base';
+import { H3, Section, Body3, Button } from '../../../../../components/Base';
 
 const getButtonName = (name: string, isArrowIconInButton: boolean) =>
   isArrowIconInButton ? (

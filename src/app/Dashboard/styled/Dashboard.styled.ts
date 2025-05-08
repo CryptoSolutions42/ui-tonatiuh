@@ -16,6 +16,7 @@ export const DashboardBody = styled.div`
   width: 100%;
   height: 100%;
   background: #212327;
+  overflow-y: 'auto';
 `;
 
 export const TradingComponent = styled.div`

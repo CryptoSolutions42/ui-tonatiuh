@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Section } from '../../../../../components/Section';
+import { Section } from '../../../../../components/Base/Section';
 import { H2, Body2 } from '../../../../../components/Base/Text';
 import { Card } from '../CardsSection/components/Card';
 import { StyledStorySection, StyledStorySectionContent } from './styled';

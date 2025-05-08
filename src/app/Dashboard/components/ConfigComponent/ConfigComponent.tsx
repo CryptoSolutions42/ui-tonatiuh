@@ -92,6 +92,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
           onSubmit={handleSubmit((data: ConfigType) => {
             console.log(data);
             dispatch(AppSagaAction.updateConfig({ ...data, id: config.id }));
+            window.location.reload();
           })}
           isVisible={isExpanded}
         >

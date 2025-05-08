@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { Section } from '../../../../../components';
-import { Button, SH1, Body3 } from '../../../../../components/Base';
+import { Button, SH1, Body3, Section } from '../../../../../components/Base';
 import { HorizonOrVerticalLine, StyledContentWrapper, StyledHinkalSDKSection } from './styled';
 import { HinkalSDKSectionType } from '../../../types';
 
