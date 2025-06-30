@@ -17,7 +17,11 @@
     "jsx": "react-jsx",
     "rootDir": "./src",
     "outDir": "./build",
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules"],

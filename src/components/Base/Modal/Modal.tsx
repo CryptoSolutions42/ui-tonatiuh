@@ -4,13 +4,14 @@ import { RootState } from '../../../redux/store';
 import { appStoreActions } from '../../../redux/reducer/app-reducer/reducer';
 
 const ModalWrapper = styled.div`
-  z-index: 1;
+  z-index: 10000;
   width: 100%;
   height: 100%;
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
 `;
 
 const Background = styled.div`
@@ -24,15 +25,28 @@ const Background = styled.div`
 
 const ModalTag = styled.div`
   position: absolute;
-  background-image: linear-gradient(to bottom right, #207873, #072b2a);
+  background: #131414;
   width: max-content;
-  height: max-content;
+  height: 85%;
   padding: 60px;
-  border-radius: 10px;
+  border-radius: 5px;
   z-index: 2;
-  -webkit-box-shadow: -1px 1px 13px 14px rgba(232, 95, 46, 0.22);
-  -moz-box-shadow: -1px 1px 13px 14px rgba(232, 95, 46, 0.22);
-  box-shadow: -1px 1px 13px 14px rgba(232, 95, 46, 0.22);
+  overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+    background-color: #f9f9fd;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom right, rgba(32, 124, 145, 0.94), rgb(12, 126, 123));
+  }
 `;
 
 const Image = styled.img`
@@ -46,13 +60,15 @@ const Image = styled.img`
 
 export const ModalWindow = ({ children }: { children: JSX.Element }) => {
   const dispatch = useDispatch();
-  const { AppReducer } = useSelector((state: RootState) => state);
-  const { isOpenModal } = AppReducer;
+  const { modalWindow } = useSelector((state: RootState) => state.AppReducer);
 
   return (
     <ModalWrapper>
-      <Image onClick={() => dispatch(appStoreActions.toggleModal(!isOpenModal))} src="./images/icons/close.png" />
-      <Background onClick={() => dispatch(appStoreActions.toggleModal(!isOpenModal))} />
+      <Image
+        onClick={() => dispatch(appStoreActions.toggleModal({ ...modalWindow, isOpenModal: !modalWindow.isOpenModal }))}
+        src="/images/icons/close.svg"
+      />
+      <Background />
       <ModalTag>{children}</ModalTag>
     </ModalWrapper>
   );

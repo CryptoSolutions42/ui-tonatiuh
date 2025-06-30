@@ -17,7 +17,7 @@ export const MobileMenu: FC = () => {
               <Button
                 key={`mobile_menu-${index}`}
                 children={element.title}
-                type={'primary-l'}
+                typeButton={'primary-l'}
                 handleClick={() => {
                   navigate(element.path);
                 }}

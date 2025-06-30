@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Section } from '../../../../../components';
+import { Section } from '../../../../../components/Base';
 import { Card } from './components/Card';
 import { StyledCardsSection } from './styled';
 import { CardSectionType } from '../../../types';

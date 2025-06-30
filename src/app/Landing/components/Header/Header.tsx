@@ -18,7 +18,7 @@ export const Header: FC<HeaderOptionType> = ({ logo, navMenu, button, isMobile }
           <SelectLanguageContainer />
           <div style={{ display: 'flex', alignItems: 'center', width: '100vw' }}>
             <Button
-              type={button.buttonType}
+              typeButton={button.buttonType}
               children={button.buttonName}
               handleClick={() => {
                 console.log('Click!');

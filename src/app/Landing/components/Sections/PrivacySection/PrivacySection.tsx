@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { Section } from '../../../../../components';
-import { SH1, Body2 } from '../../../../../components/Base';
+import { SH1, Body2, Section } from '../../../../../components/Base';
 import { StyledPrivacySection, StyledPrivacySectionContent } from './styled';
 import { PrivacySectionType } from '../../../types';
 

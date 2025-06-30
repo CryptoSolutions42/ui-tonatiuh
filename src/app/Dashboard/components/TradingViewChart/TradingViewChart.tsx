@@ -1,11 +1,15 @@
 import React, { useEffect, useRef } from 'react';
-import { createChart, CrosshairMode } from 'lightweight-charts';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { ColorType, createChart, CrosshairMode, LineStyle } from 'lightweight-charts';
 
-export const TradingViewChart = ({ symbol, interval }) => {
-  const chartOptions = { layout: { textColor: 'black', background: { type: 'solid', color: 'white' } } };
+import { StyledTradingViewChart } from './styled/TradingViewChart.styled';
+import { getCandlestickData } from '../../../../utils/helper';
+import { OrderType } from '../../../../redux/types';
+import { RootState } from '@/redux/store';
 
+export const TradingViewChart = ({ symbol, interval }: { symbol: string; interval: string }) => {
   const chartContainerRef = useRef<HTMLDivElement | null>(null);
+  const orderLinesRef = useRef<any[]>([]);
 
   useEffect(() => {
     if (!chartContainerRef.current) return;
@@ -13,12 +17,47 @@ export const TradingViewChart = ({ symbol, interval }) => {
     const chart = createChart(chartContainerRef.current, {
       width: chartContainerRef.current.clientWidth,
       height: chartContainerRef.current.clientHeight,
+      autoSize: true,
       crosshair: {
         mode: CrosshairMode.Normal,
       },
+      layout: {
+        background: {
+          type: ColorType.VerticalGradient,
+          bottomColor: 'rgb(26, 28, 31)',
+          topColor: 'rgb(26, 28, 31)',
+        },
+        textColor: '#bab9b9',
+      },
+      grid: {
+        vertLines: {
+          color: 'rgba(63, 65, 71, 0.5)',
+          style: LineStyle.Dotted,
+        },
+        horzLines: {
+          color: 'rgba(63, 65, 71, 0.5)',
+          style: LineStyle.Dotted,
+        },
+      },
+      handleScroll: {
+        mouseWheel: true,
+        pressedMouseMove: true,
+      },
+      handleScale: {
+        axisPressedMouseMove: true,
+        mouseWheel: true,
+        pinch: true,
+      },
     });
 
-    const candlestickSeries = chart.addCandlestickSeries();
+    const candlestickSeries = chart.addCandlestickSeries({
+      upColor: '#12a7a2',
+      borderUpColor: '#12a7a2',
+      wickUpColor: '#12a7a2',
+      downColor: '#d13159',
+      borderDownColor: '#d13159',
+      wickDownColor: '#d13159',
+    });
 
     const fetchData = async () => {
       const data = await getCandlestickData(symbol, interval);
@@ -27,6 +66,7 @@ export const TradingViewChart = ({ symbol, interval }) => {
     };
 
     fetchData();
+    const intervalId = setInterval(fetchData, 20000);
 
     const handleResize = () => {
       if (chartContainerRef.current) {
@@ -37,43 +77,12 @@ export const TradingViewChart = ({ symbol, interval }) => {
     window.addEventListener('resize', handleResize);
 
     return () => {
+      clearInterval(intervalId);
       window.removeEventListener('resize', handleResize);
+      orderLinesRef.current.forEach((line) => candlestickSeries.removePriceLine(line));
       chart.remove();
     };
   }, [symbol, interval]);
 
-  return (
-    <div
-      ref={chartContainerRef}
-      style={{ marginRight: '20px', position: 'relative', width: '100%', height: '540px', borderRadius: '10px' }}
-    />
-  );
-};
-
-const getCandlestickData = async (symbol: string, interval: string) => {
-  try {
-    const validIntervals = ['1m', '3m', '5m', '15m', '30m', '1H', '2H', '4H', '6H', '12H', '1D', '1W', '1M'];
-    if (!validIntervals.includes(interval)) {
-      throw new Error(`Invalid interval: ${interval}. Valid intervals are: ${validIntervals.join(', ')}`);
-    }
-
-    const response = await axios.get(
-      `https://www.okx.com/api/v5/market/candles?instId=${symbol}&bar=${interval}&limit=300`,
-    );
-    console.log('API Response:', response.data);
-    const data = response.data.data
-      .flatMap((candle: string[]) => ({
-        time: +candle[0],
-        open: parseFloat(candle[1]),
-        high: parseFloat(candle[2]),
-        low: parseFloat(candle[3]),
-        close: parseFloat(candle[4]),
-      }))
-      .sort((a, b) => a.time - b.time);
-
-    return data;
-  } catch (error) {
-    console.error('Error fetching data from OKX API:', error);
-    return [];
-  }
+  return <StyledTradingViewChart ref={chartContainerRef} />;
 };

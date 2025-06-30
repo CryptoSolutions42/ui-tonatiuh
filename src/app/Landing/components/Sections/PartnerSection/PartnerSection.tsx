@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Section } from '../../../../../components/Section';
+import { Section } from '../../../../../components/Base/Section';
 import { StyledPartnerSection } from './styled';
 import { PartnerSectionType } from '../../../types';
 

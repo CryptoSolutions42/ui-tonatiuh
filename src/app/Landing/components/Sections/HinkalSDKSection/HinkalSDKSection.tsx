@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { Section } from '../../../../../components';
-import { Button, SH1, Body3 } from '../../../../../components/Base';
+import { Button, SH1, Body3, Section } from '../../../../../components/Base';
 import { HorizonOrVerticalLine, StyledContentWrapper, StyledHinkalSDKSection } from './styled';
 import { HinkalSDKSectionType } from '../../../types';
 
@@ -42,7 +41,7 @@ export const HinkalSDKSection: FC<HinkalSDKSectionType> = ({ firstBlock, secondB
               handleClick={() => {
                 console.log('Click!');
               }}
-              type={firstButton.buttonType}
+              typeButton={firstButton.buttonType}
             />
           </StyledContentWrapper>
           <HorizonOrVerticalLine />
@@ -56,7 +55,7 @@ export const HinkalSDKSection: FC<HinkalSDKSectionType> = ({ firstBlock, secondB
               handleClick={() => {
                 console.log('Click!');
               }}
-              type={secondButton.buttonType}
+              typeButton={secondButton.buttonType}
             />
           </StyledContentWrapper>
         </StyledHinkalSDKSection>

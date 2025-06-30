@@ -30,6 +30,21 @@ const primaryB = css`
   }
 `;
 
+const secondaryB = css`
+  margin: 0 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
 const secondaryL = css`
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -48,6 +63,11 @@ const disabledPrimaryL = css`
   color: #eaedfe;
 `;
 const disabledPrimaryB = css`
+  background-color: rgb(18, 66, 76);
+  color: #e0e3ff;
+  border-radius: 10px;
+`;
+const disabledSecondaryB = css`
   background-color: #b1a5ff;
   color: #e0e3ff;
 `;
@@ -57,7 +77,7 @@ const disabledSecondaryL = css`
   color: #b7bce4;
 `;
 
-export const StyledButton = styled.div<{ type: TypeButton; disabled?: boolean }>`
+export const StyledButton = styled.button<{ typeButton: TypeButton; disabled?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,15 +95,19 @@ export const StyledButton = styled.div<{ type: TypeButton; disabled?: boolean }>
   border: none;
   cursor: pointer;
 
-  ${({ type, disabled }: { type: TypeButton; disabled?: boolean }) =>
-    type === 'primary-l'
+  ${({ typeButton, disabled }: { typeButton: TypeButton; disabled?: boolean }) =>
+    typeButton === 'primary-l'
       ? disabled
         ? disabledPrimaryL
         : primaryL
-      : type === 'primary-b'
+      : typeButton === 'primary-b'
       ? disabled
         ? disabledPrimaryB
         : primaryB
+      : typeButton === 'secondary-b'
+      ? disabled
+        ? disabledSecondaryB
+        : secondaryB
       : disabled
       ? disabledSecondaryL
       : secondaryL};

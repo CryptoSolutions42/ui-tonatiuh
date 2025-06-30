@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import { StyledHelloInfo, StyledHelloSection, HeadDescriptionWrapper } from './styled';
 import { HelloSectionType } from '../../../types';
-import { Section } from '../../../../../components';
-import { H1, Body2, Button } from '../../../../../components/Base';
+import { H1, Body2, Button, Section } from '../../../../../components/Base';
 
 const defaultButtonName = (
   <div
@@ -40,7 +39,7 @@ export const HelloSection: FC<HelloSectionType> = ({
             </HeadDescriptionWrapper>
             {isButtonConnect && (
               <Button
-                type={button.buttonType}
+                typeButton={button.buttonType}
                 children={button.buttonName ?? defaultButtonName}
                 handleClick={() => {
                   console.log('Click!');

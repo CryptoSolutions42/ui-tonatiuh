@@ -1,40 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ConfigType, IAppState, NotificationType } from '../../types';
+import { BalanceType, ConfigType, IAppState, NotificationType, OrderType, SessionType } from '../../types';
 
 const initialState: IAppState = {
   isLoading: false,
-  isOpenModal: false,
+  modalWindow: {
+    isOpenModal: false,
+    modalType: '',
+  },
   notification: {
     isActive: false,
     mode: undefined,
     message: undefined,
   },
   userId: '',
-  config: {
-    apiKey: '',
-    privateKey: '',
-    password: '',
-    symbol: 'ETH/USDT',
-    positionSize: 0.01,
-    countGridSize: 0,
-    gridSize: 0,
-    percentBuyBackStep: 0.03,
-    percentFromBalance: 0.03,
-    isFibonacci: true,
-    takeProfit: 0,
-    stopLoss: 0,
-    isEmergencyStop: false,
-    percentProfit: 0.01,
-    candlePriceRange: '4h',
-    isPercentTargetAfterTakeProfit: true,
-    isCapitalizeDeltaFromSale: false,
-    isCoinAccumulation: false,
-    isConfigUpdate: false,
-    isAutoStartTrading: true,
-    percentTargetAfterTakeProfit: 0.001,
-    balanceDistribution: false,
-    exchange: 'okx',
-  },
+  configs: [],
+  orders: [],
+  ordersForHistory: [],
+  currentConfig: undefined,
+  currentMenu: 'dashboard',
+  balance: [{} as BalanceType],
+  allSession: [{} as SessionType],
 };
 
 export const appStore = createSlice({
@@ -54,11 +39,32 @@ export const appStore = createSlice({
         message: undefined,
       };
     },
-    toggleModal(state, { payload }: PayloadAction<boolean>) {
-      state.isOpenModal = payload;
+    toggleModal(state, { payload }: PayloadAction<{ isOpenModal: boolean; modalType: string }>) {
+      if (payload.modalType !== '') state.modalWindow = payload;
     },
-    getConfig(state, { payload }: PayloadAction<ConfigType>) {
-      state.config = payload;
+    getConfigsState(state, { payload }: PayloadAction<ConfigType[]>) {
+      state.configs = payload;
+    },
+    getCurrentConfig(state, { payload }: PayloadAction<ConfigType>) {
+      state.currentConfig = payload;
+    },
+    setCurrentMenu(state, { payload }: PayloadAction<string>) {
+      state.currentMenu = payload;
+    },
+    setOrders(state, { payload }: PayloadAction<OrderType[]>) {
+      state.orders = payload;
+    },
+    setOrdersForHistory(state, { payload }: PayloadAction<{ indexSession: string; orders: OrderType[] }>) {
+      state.ordersForHistory.push(payload);
+    },
+    clearOrdersForHistory(state) {
+      state.ordersForHistory = [];
+    },
+    setBalance(state, { payload }: PayloadAction<BalanceType[]>) {
+      state.balance = payload;
+    },
+    setSession(state, { payload }: PayloadAction<SessionType[]>) {
+      state.allSession = payload;
     },
   },
 });

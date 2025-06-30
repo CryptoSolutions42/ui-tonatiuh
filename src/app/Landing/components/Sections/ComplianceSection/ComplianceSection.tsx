@@ -6,8 +6,7 @@ import {
   StyledContent,
 } from './styled/ComplianceSection.styled';
 import { ComplianceSectionType } from '../../../types';
-import { Section } from '../../../../../components';
-import { H3, Body3, Button } from '../../../../../components/Base';
+import { H3, Section, Body3, Button } from '../../../../../components/Base';
 
 const getButtonName = (name: string, isArrowIconInButton: boolean) =>
   isArrowIconInButton ? (
@@ -51,7 +50,7 @@ export const ComplianceSection: FC<ComplianceSectionType> = ({
             <Button
               width="150px"
               handleClick={() => console.log('click')}
-              type={button.buttonType}
+              typeButton={button.buttonType}
               children={getButtonName(button.buttonName, isArrowIconInButton)}
             />
           </StyledComplianceSectionContent>

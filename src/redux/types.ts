@@ -1,3 +1,12 @@
+import { Order } from 'ccxt';
+
+export type BalanceType = {
+  usdt: number;
+  profitAll: number;
+  profitUsdt: number;
+  balanceObject: string;
+};
+
 export type NotificationType = {
   isActive?: boolean;
   mode?: 'success' | 'info' | 'error';
@@ -7,12 +16,24 @@ export type NotificationType = {
 export interface IAppState {
   isLoading: boolean;
   notification: NotificationType;
-  isOpenModal: boolean;
+  modalWindow: {
+    isOpenModal: boolean;
+    modalType: string;
+  };
   userId: string;
-  config: ConfigType;
+  configs: ConfigType[];
+  currentConfig?: ConfigType;
+  currentMenu: string;
+  orders: OrderType[];
+  ordersForHistory: { indexSession: string; orders: OrderType[] }[];
+  balance: BalanceType[];
+  allSession: SessionType[];
 }
 
+export type SettingType = { urlTrading: string; wsUrl: string };
+
 export type ConfigType = {
+  id: number;
   apiKey?: string;
   privateKey?: string;
   password?: string;
@@ -31,9 +52,27 @@ export type ConfigType = {
   isPercentTargetAfterTakeProfit: boolean;
   isCapitalizeDeltaFromSale: boolean;
   isCoinAccumulation: boolean;
-  isConfigUpdate: boolean;
   isAutoStartTrading: boolean;
+  isStopTrading: boolean;
   percentTargetAfterTakeProfit: number;
   balanceDistribution: boolean;
-  exchange: 'okx';
+  exchange: 'okx' | 'binance' | 'bitget' | 'kucoin' | 'mexc' | 'poloniex' | 'gate' | 'exmo' | 'bybit';
+  loggerEvent: string;
+};
+
+export type SessionType = {
+  indexSession: string;
+  isActive: boolean;
+};
+
+export type OrderType = {
+  id: number;
+  orderId: string;
+  order: Order;
+  createAt: number;
+  price: number;
+  amount: number;
+  side: 'buy' | 'sell';
+  symbol: string;
+  isActive: number;
 };

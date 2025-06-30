@@ -7,7 +7,6 @@ const SH1Style = css`
   font-weight: 500;
   font-size: 32px;
   line-height: 38px;
-  margin-bottom: 13px;
 `;
 
 const Body3Style = css`
