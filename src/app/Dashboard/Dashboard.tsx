@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -51,7 +51,7 @@ const createConfigFields = [
   'exchange',
 ];
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FC = memo(() => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { currentConfig, configs, modalWindow, orders, allSession } = useSelector(
@@ -246,6 +246,6 @@ const Dashboard: React.FC = () => {
       </DashboardContainer>
     </StyledDashboard>
   );
-};
+});
 
 export default Dashboard;
