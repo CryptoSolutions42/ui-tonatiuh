@@ -18,9 +18,10 @@ import { startsWithIs } from '@/utils/helper';
 import { configFields } from './config-fields';
 import { AppSagaAction } from '@/redux/saga/app-saga/saga-actions';
 
-export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) => {
+export const ConfigComponent: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { currentConfig } = useSelector((state: RootState) => state.AppReducer);
   const [width, setWidth] = useState<string>('150px');
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const inputRefs = useRef<Record<string, HTMLInputElement>>({});
@@ -35,7 +36,6 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
   }
 
   function toolbarHandleWidth() {
-    console.log(config);
     if (width === '150px') {
       setWidth('600px');
       setTimeout(() => setIsExpanded(true), 200);
@@ -51,12 +51,11 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
     //   setWidth(`${newWidth}px`);
     // };
     // handleResize();
-    console.log(config);
     window.addEventListener('resize', () => console.log(window.innerWidth));
     return () => {
       window.removeEventListener('resize', () => console.log(window.innerWidth));
     };
-  }, [config]);
+  }, [currentConfig]);
 
   const registerNumberInput = (name: keyof ConfigType, value: number) => {
     return {
@@ -91,7 +90,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
         <ConfigForm
           onSubmit={handleSubmit((data: ConfigType) => {
             console.log(data);
-            dispatch(AppSagaAction.updateConfig({ ...data, id: config.id }));
+            dispatch(AppSagaAction.updateConfig({ ...data, id: currentConfig.id }));
             window.location.reload();
           })}
           isVisible={isExpanded}
@@ -106,7 +105,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
           </HiddenButtonWrapper>
           <FormGroup>
             <LabelForm>{t('symbol')}</LabelForm>
-            <select {...register('symbol')} defaultValue={config.symbol}>
+            <select {...register('symbol')} defaultValue={currentConfig.symbol}>
               {[
                 'ETH/USDT',
                 'BTC/USDT',
@@ -129,7 +128,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
           </FormGroup>
           <FormGroup>
             <LabelForm>{t('exchange')}</LabelForm>
-            <select {...register('exchange')} defaultValue={config.exchange}>
+            <select {...register('exchange')} defaultValue={currentConfig.exchange}>
               {['okx', 'binance', 'bitget', 'kucoin', 'mexc', 'poloniex', 'gate', 'exmo', 'bybit'].map((exchange) => (
                 <option key={exchange} value={exchange}>
                   {exchange}
@@ -139,7 +138,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
           </FormGroup>
           <FormGroup>
             <LabelForm>{t('candlePriceRange')}</LabelForm>
-            <select {...register('candlePriceRange')} defaultValue={config.candlePriceRange}>
+            <select {...register('candlePriceRange')} defaultValue={currentConfig.candlePriceRange}>
               {['4h', '1h', '1d'].map((candle) => (
                 <option key={candle} value={candle}>
                   {candle}
@@ -161,18 +160,18 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
           </FormGroup>
           <FormGroup>
             <LabelForm>{t('positionSize')}</LabelForm>
-            <input type="number" step="0.01" {...registerNumberInput('positionSize', config.positionSize)} />
+            <input type="number" step="0.01" {...registerNumberInput('positionSize', currentConfig.positionSize)} />
           </FormGroup>
           <FormGroup>
             <LabelForm>{t('percentProfit')}</LabelForm>
-            <input type="number" step="0.01" {...registerNumberInput('percentProfit', config.percentProfit)} />
+            <input type="number" step="0.01" {...registerNumberInput('percentProfit', currentConfig.percentProfit)} />
           </FormGroup>
           <FormGroup>
             <LabelForm>{t('percentBuyBackStep')}</LabelForm>
             <input
               type="number"
               step="0.001"
-              {...registerNumberInput('percentBuyBackStep', config.percentBuyBackStep)}
+              {...registerNumberInput('percentBuyBackStep', currentConfig.percentBuyBackStep)}
             />
           </FormGroup>
           <FormGroup>
@@ -180,7 +179,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
             <input
               type="number"
               step="0.01"
-              {...registerNumberInput('percentFromBalance', config.percentFromBalance)}
+              {...registerNumberInput('percentFromBalance', currentConfig.percentFromBalance)}
             />
           </FormGroup>
           <FormGroup>
@@ -188,7 +187,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
             <input
               type="number"
               step="0.01"
-              {...registerNumberInput('percentTargetAfterTakeProfit', config.percentTargetAfterTakeProfit)}
+              {...registerNumberInput('percentTargetAfterTakeProfit', currentConfig.percentTargetAfterTakeProfit)}
             />
           </FormGroup>
           <FormGroup>
@@ -197,7 +196,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
               style={{ height: '25px', width: '25px' }}
               {...register('isAutoStartTrading')}
               type="checkbox"
-              defaultChecked={config.isAutoStartTrading}
+              defaultChecked={currentConfig.isAutoStartTrading}
             />
           </FormGroup>
           <FormGroup>
@@ -206,7 +205,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
               style={{ height: '25px', width: '25px' }}
               {...register('isFibonacci')}
               type="checkbox"
-              defaultChecked={config.isFibonacci}
+              defaultChecked={currentConfig.isFibonacci}
             />
           </FormGroup>
           <FormGroup>
@@ -215,7 +214,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
               style={{ height: '25px', width: '25px' }}
               {...register('isPercentTargetAfterTakeProfit')}
               type="checkbox"
-              defaultChecked={config.isPercentTargetAfterTakeProfit}
+              defaultChecked={currentConfig.isPercentTargetAfterTakeProfit}
             />
           </FormGroup>
           <FormGroup>
@@ -224,7 +223,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
               style={{ height: '25px', width: '25px' }}
               {...register('isCapitalizeDeltaFromSale')}
               type="checkbox"
-              defaultChecked={config.isCapitalizeDeltaFromSale}
+              defaultChecked={currentConfig.isCapitalizeDeltaFromSale}
             />
           </FormGroup>
           <FormGroup>
@@ -233,7 +232,7 @@ export const ConfigComponent: React.FC<{ config: ConfigType }> = ({ config }) =>
               style={{ height: '25px', width: '25px' }}
               {...register('isCoinAccumulation')}
               type="checkbox"
-              defaultChecked={config.isCoinAccumulation}
+              defaultChecked={currentConfig.isCoinAccumulation}
             />
           </FormGroup>
           <Button type="submit" children={t('Update Config')} typeButton={'primary-b'} />

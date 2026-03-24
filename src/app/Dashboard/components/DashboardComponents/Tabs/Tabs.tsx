@@ -10,7 +10,7 @@ import { appStoreActions } from '../../../../../redux/reducer/app-reducer/reduce
 export const Tabs: FC<{ currentTab?: number }> = ({ currentTab }) => {
   const dispatch = useDispatch();
   const { configs, modalWindow } = useSelector((state: RootState) => state.AppReducer);
-  const [currentConfigId, setCurrentConfigId] = useState<number>(0);
+  const [currentConfigId, setCurrentConfigId] = useState<number>(currentTab ?? 0);
 
   useEffect(() => {
     dispatch(AppSagaAction.getConfigs());
@@ -19,6 +19,7 @@ export const Tabs: FC<{ currentTab?: number }> = ({ currentTab }) => {
 
   function tabConfigHandler(configIndex: number) {
     dispatch(appStoreActions.getCurrentConfig(configs[configIndex]));
+    setCurrentConfigId(configIndex);
     window.localStorage.setItem('tabCurrentConfigId', configs[configIndex].id.toString());
   }
 

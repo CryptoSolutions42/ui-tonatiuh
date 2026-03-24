@@ -22,7 +22,7 @@ export interface IAppState {
   };
   userId: string;
   configs: ConfigType[];
-  currentConfig?: ConfigType;
+  currentConfig: ConfigType;
   currentMenu: string;
   orders: OrderType[];
   ordersForHistory: { indexSession: string; orders: OrderType[] }[];

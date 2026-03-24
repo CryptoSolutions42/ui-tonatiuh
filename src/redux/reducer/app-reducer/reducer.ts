@@ -16,7 +16,7 @@ const initialState: IAppState = {
   configs: [],
   orders: [],
   ordersForHistory: [],
-  currentConfig: undefined,
+  currentConfig: { symbol: 'ETH/USDT' } as ConfigType,
   currentMenu: 'dashboard',
   balance: [{} as BalanceType],
   allSession: [{} as SessionType],
