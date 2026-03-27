@@ -11,7 +11,7 @@ const SOCKET_SERVER_URL = 'ws://localhost';
 
 export const LoggerComponent: FC<{ config: ConfigType }> = ({ config }) => {
   const dispatch = useDispatch();
-  const { orders } = useSelector((state: RootState) => state.AppReducer);
+  const { orders, currentConfig } = useSelector((state: RootState) => state.AppReducer);
   const [log, setLog] = useState<LoggerType>({} as LoggerType);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export const LoggerComponent: FC<{ config: ConfigType }> = ({ config }) => {
     return () => {
       socket.disconnect();
     };
-  }, [config, log]);
+  }, [config, log, currentConfig]);
 
   return (
     <StyledLoggerComponent>

@@ -199,7 +199,7 @@ const Dashboard: React.FC = memo(() => {
   useEffect(() => {
     dispatch(AppSagaAction.getAllSession());
     currentConfig && dispatch(AppSagaAction.getOrders(currentConfig.id));
-  }, [currentConfig, configs]);
+  }, [currentConfig, configs.length]);
 
   return (
     <StyledDashboard>
@@ -223,7 +223,7 @@ const Dashboard: React.FC = memo(() => {
                   <>
                     <TradingComponent>
                       <TradingViewChart symbol={convertSymbol(currentConfig.symbol)} interval="1H" />
-                      <ConfigComponent />
+                      <ConfigComponent config={currentConfig} />
                     </TradingComponent>
                     <PanelComponent config={currentConfig} />
                   </>

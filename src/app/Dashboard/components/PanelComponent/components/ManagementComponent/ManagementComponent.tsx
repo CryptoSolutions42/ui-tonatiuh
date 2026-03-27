@@ -15,7 +15,7 @@ export const ManagementComponent: FC<{ idConfig: number }> = ({ idConfig }) => {
 
   useEffect(() => {
     console.log('reload ManagementComponent');
-  }, [idConfig]);
+  }, [idConfig, currentConfig, orders]);
 
   return (
     <StyledManagementComponent>

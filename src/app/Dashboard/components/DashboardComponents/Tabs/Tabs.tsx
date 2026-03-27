@@ -10,16 +10,16 @@ import { appStoreActions } from '../../../../../redux/reducer/app-reducer/reduce
 export const Tabs: FC<{ currentTab?: number }> = ({ currentTab }) => {
   const dispatch = useDispatch();
   const { configs, modalWindow } = useSelector((state: RootState) => state.AppReducer);
-  const [currentConfigId, setCurrentConfigId] = useState<number>(currentTab ?? 0);
+  // const [currentConfigId, setCurrentConfigId] = useState<number>(currentTab!);
 
   useEffect(() => {
     dispatch(AppSagaAction.getConfigs());
-    setCurrentConfigId(+(window.localStorage.getItem('tabCurrentConfigId')! ?? currentTab));
+    // setCurrentConfigId(+(window.localStorage.getItem('tabCurrentConfigId')! ?? currentTab));
   }, [currentTab]);
 
   function tabConfigHandler(configIndex: number) {
     dispatch(appStoreActions.getCurrentConfig(configs[configIndex]));
-    setCurrentConfigId(configIndex);
+    // setCurrentConfigId(configIndex);
     window.localStorage.setItem('tabCurrentConfigId', configs[configIndex].id.toString());
   }
 
@@ -45,11 +45,7 @@ export const Tabs: FC<{ currentTab?: number }> = ({ currentTab }) => {
     >
       {configs.length !== 0 &&
         configs.flatMap((item: ConfigType, index) => (
-          <TabWrapper
-            isCurrent={item.id === currentConfigId}
-            key={`tab-${item.id}`}
-            onClick={() => tabConfigHandler(index)}
-          >
+          <TabWrapper isCurrent={item.id === currentTab} key={`tab-${item.id}`} onClick={() => tabConfigHandler(index)}>
             {item.symbol}
           </TabWrapper>
         ))}
